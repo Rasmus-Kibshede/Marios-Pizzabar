@@ -12,7 +12,8 @@ public class Register {
     orders = new ArrayList<>();
 
     //Menu here
-    /*
+  /*
+    //do while here
     switch (menu.readChoice) {
       case 1:
         showMenu();
@@ -26,8 +27,14 @@ public class Register {
       case 4:
         //statistics
         break;
+      case 5:
+        //quit
+        break;
+      default:
+        //Error
     }
-    */
+ */
+
 
   }
 
