@@ -8,7 +8,7 @@ public class Register {
   //Rasmus
   public void run() {
     ui = new UI();
-    menu = new Menu();
+    //menu = new Menu();
     orders = new ArrayList<>();
 
     //Menu here
