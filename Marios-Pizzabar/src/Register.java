@@ -2,10 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Register {
   private Menu menu;
@@ -96,6 +93,12 @@ public class Register {
       double price = Double.parseDouble(arr[1]);
       statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
     }
-    System.out.println(statistic);
+
+    Iterator it = statistic.entrySet().iterator();
+    while (it.hasNext()) {
+      Map.Entry pair = (Map.Entry)it.next();
+      System.out.println(pair.getKey() + ": $" + pair.getValue());
+      it.remove();
+    }
   }
 }
