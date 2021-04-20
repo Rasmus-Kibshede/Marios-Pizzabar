@@ -7,6 +7,6 @@ Alexander Kaare Andersson - https://github.com/Alex-shadow1005
 
 Jakob Majid - https://github.com/jakobmajiddd
 
-Martin Steen Laursen - https://github.com/martinlaursen97
+Martin Steen Laursen - https://github.com/martinlaursen97    (snabmeister)
 
 Rasmus Lundberg Kibshede - https://github.com/Rasmus-Kibshede
