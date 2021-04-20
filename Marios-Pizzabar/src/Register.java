@@ -1,4 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Register {
   private Menu menu;
@@ -7,6 +14,7 @@ public class Register {
 
   //Rasmus
   public void run() {
+    showStatistics();
     ui = new UI();
     //menu = new Menu();
     orders = new ArrayList<>();
@@ -39,9 +47,55 @@ public class Register {
   }
 
 
+  // Martin
   public void showMenu() {
     //menu.getMenuList();
   }
 
+  // Martin
+  public void createOrder(ArrayList<Pizza> pizzas) {
+    try {
+      Order order = new Order(pizzas); // ID
+      PrintStream ps = new PrintStream("statistics");
+      //ps.append(order.statisticsFormat());
+      orders.add(order);
+    } catch (FileNotFoundException e) {
+      System.out.println(e);
+    }
 
+  }
+
+  // Martin
+  public void deleteOrder(int id) {
+    //for (Order o : orders) {
+    //  if (o.getID() == id) {
+    //    orders.remove(o);
+    //    break;
+    //  }
+    //}
+  }
+
+  // Martin
+  public void showStatistics() {
+    ArrayList<String> storage = new ArrayList<>();
+    HashMap<String, Double> statistic = new HashMap<>();
+
+    try {
+      Scanner input = new Scanner(new File("Marios-Pizzabar/statistics.txt"));
+      while (input.hasNextLine()) {
+        String text = input.nextLine();
+        storage.add(text);
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("File not found");
+    }
+
+    for (int i = 0; i < storage.size(); i++) {
+      String[] arr = storage.get(i).split("_");
+      String name = arr[0];
+      double price = Double.parseDouble(arr[1]);
+      statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
+    }
+    System.out.println(statistic);
+  }
 }
