@@ -7,7 +7,7 @@ public class Order {
   private String dateTime;
   private double totalPrice;
   private int id;
-  private ArrayList<Integer> orderList = new ArrayList<Integer>();
+  private ArrayList<Pizza> orderList = new ArrayList<>();
 
 
   DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -30,7 +30,7 @@ public class Order {
 
   public Order(ArrayList<Pizza> thisOrder) {
     for (int i = 0; i < thisOrder.size(); i++) {
-      orderList.add(thisOrder.get(i).getPizzaNumber());
+      orderList = thisOrder;
     }
 
     LocalDateTime timeNow = LocalDateTime.now();
@@ -39,10 +39,9 @@ public class Order {
   }
 
   public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
-    for (int i = 0; i < thisOrder.size(); i++) {
-      orderList.add(thisOrder.get(i).getPizzaNumber());
+      orderList = thisOrder;
 
-    }
+
 
 
     LocalDateTime timeNow = LocalDateTime.now();
@@ -58,13 +57,13 @@ public class Order {
     public ArrayList<String> statisticsFormat() {
       ArrayList<String> lst = new ArrayList<>();
       for (int i = 0; i < orderList.size(); i++) {
-      lst.add(orderList.get(i).getPizzaName + "_" + orderList.get(i).getPizzaPrice);
+      lst.add(orderList.get(i).getPizzaName() + "_" + orderList.get(i).getPizzaPrice());
     }
       return lst;
     }
 
 
-  // Rasmus
+  /* Rasmus
   public String getOrderList() {
     StringBuilder text = null;
     for (int i = 0; i < orderList.size(); i++) {
@@ -74,6 +73,8 @@ public class Order {
 
     return text.toString();
   }
+
+   */
 }
 
 
