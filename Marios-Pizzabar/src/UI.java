@@ -15,7 +15,9 @@ public class UI {
   }
   //Rasmus + Alex
   public void printOrders(Order order){
+    System.out.println(order.getId());
     System.out.println(order.getOrderList());
+    System.out.println(order.getTotalPrice());
   }
 
   //Rasmus + Alex
