@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.security.Principal;
 import java.util.*;
 
 public class Register {
@@ -94,11 +93,20 @@ public class Register {
       statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
     }
 
+    ArrayList<String> sorted = new ArrayList<>();
+
     Iterator it = statistic.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry pair = (Map.Entry)it.next();
-      System.out.println(pair.getKey() + ": $" + pair.getValue());
+      String s = "$" + pair.getValue() + " \t " + pair.getKey();
+      sorted.add(s);
       it.remove();
+    }
+
+    sorted.sort(Collections.reverseOrder());
+
+    for (int i = 0; i < sorted.size(); i++) {
+      System.out.println((i + 1) + ": " +sorted.get(i));
     }
   }
 }
