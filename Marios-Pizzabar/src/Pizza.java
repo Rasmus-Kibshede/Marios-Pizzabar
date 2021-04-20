@@ -28,4 +28,18 @@ public class Pizza {
     public String getPizzaToppings() {
         return pizzaToppings;
     }
+
+    public String toString() {
+        StringBuilder text = new StringBuilder();
+        text.append("#")
+                .append(pizzaNumber)
+                .append("\t")
+                .append(" $")
+                .append(pizzaPrice)
+                .append("\t ")
+                .append(pizzaName)
+                .append(":\t")
+                .append(pizzaToppings);
+        return text.toString();
+    }
 }

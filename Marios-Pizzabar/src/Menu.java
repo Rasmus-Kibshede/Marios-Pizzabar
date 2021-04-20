@@ -4,13 +4,17 @@ public class Menu {
   private ArrayList<Pizza> menuList = new ArrayList<>();
   private String menuHeader;
   private String leadText;
-  private ArrayList<String> menuItems;
+  private ArrayList<String> menuOptions;
 
   // Martin
-  public Menu(String menuHeader, String leadText, ArrayList<String> menuItems) {
+  public Menu(String menuHeader, String leadText, ArrayList<String> menuOptions) {
     this.menuHeader = menuHeader;
     this.leadText = leadText;
-    this.menuItems = menuItems;
+    this.menuOptions = menuOptions;
+    addPizza();
+  }
+
+  public Menu() {
     addPizza();
   }
 
@@ -50,19 +54,15 @@ public class Menu {
 
   // Martin
   public void deletePizza(int id) {
-    //for (Pizza p : menuList) {
-    //    if (p.getNumber() == id) {
-    //        menuList.remove(p);
-    //        break;
-    //    }
-    //}
+    for (Pizza p : menuList) {
+        if (p.pizzaNumber == id) {
+            menuList.remove(p);
+            break;
+        }
+    }
   }
 
   // Martin
-  public ArrayList<Pizza> getMenuList() {
-    return menuList;
-  }
-
 
   public String getMenuHeader() {
     return menuHeader;
@@ -73,13 +73,17 @@ public class Menu {
   }
 
   // Rasmus
-  public String getMenuItems() {
-    StringBuilder text = null;
-    for (int i = 0; i < menuItems.size(); i++) {
-      text.append("\n").append(menuItems.get(i));
+  public String getMenuList() {
+    StringBuilder text = new StringBuilder();
+    for (int i = 0; i < menuList.size(); i++) {
+      text.append("\n").append(menuList.get(i));
     }
     text.append("\n");
 
     return text.toString();
+  }
+
+  public ArrayList<String> getMenuOptions() {
+    return menuOptions;
   }
 }

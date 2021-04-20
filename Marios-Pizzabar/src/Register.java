@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Register {
@@ -11,24 +10,30 @@ public class Register {
 
   // Rasmus + Martin
   public void run() {
+    ArrayList<String> options = new ArrayList<>();
+    options.add("1" + ". Show Menu:");
+    options.add("2" + ". Create order:");
+    options.add("3" + ". Delete order:");
+    options.add("4" + ". Show statistics:");
+    options.add("5" + ". View orders:");
+
     ui = new UI();
-    //menu = new Menu();
+    menu = new Menu("Menu", "Choose: ", options);
     orders = new ArrayList<>();
 
-    //Menu here
     int choice;
     do {
-      // ui.printOptionsMenu();
+      ui.printOptionsMenuTest(menu);
       choice = ui.getInt();
       switch (choice) {
         case 1:
-          //showMenu();
+          showMenu();
           break;
         case 2:
           //create order
           break;
         case 3:
-          //delete order
+          deleteOrder(ui.getInt());
           break;
         case 4:
           showStatistics();
@@ -36,6 +41,8 @@ public class Register {
         case 5:
           // showOrders();
           break;
+        case 6:
+          System.out.println("Exiting program...");
         default:
           System.out.println("Invalid choice");
       }
@@ -46,7 +53,7 @@ public class Register {
 
   // Martin
   public void showMenu() {
-    //menu.getMenuList();
+    System.out.println(menu.getMenuList());
   }
 
   // Martin
@@ -68,12 +75,12 @@ public class Register {
 
   // Martin
   public void deleteOrder(int id) {
-    //for (Order o : orders) {
-    //  if (o.getID() == id) {
-    //    orders.remove(o);
-    //    break;
-    //  }
-    //}
+    for (Order o : orders) {
+      if (o.getId() == id) {
+        orders.remove(o);
+        break;
+      }
+    }
   }
 
   // Martin

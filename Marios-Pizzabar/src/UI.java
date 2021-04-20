@@ -27,7 +27,7 @@ public class UI {
     //Jakob + Alex
     public void printOrders(Order order) {
         System.out.println(order.getId());
-        System.out.println(order.getOrderList());
+        //System.out.println(order.getOrderList());
         System.out.println(order.getTotalPrice());
     }
 
@@ -35,9 +35,15 @@ public class UI {
 
     public void printOptionsMenu(Menu menu) {
         System.out.println(menu.getMenuHeader());
-        System.out.println(menu.getMenuItems());
+        //System.out.println(menu.getMenuItemsTest());
         System.out.println(menu.getLeadText());
+    }
 
-
+    public void printOptionsMenuTest(Menu menu) {
+        System.out.println(menu.getMenuHeader());
+        for (String s : menu.getMenuOptions()) {
+            System.out.println(s);
+        }
+        System.out.println(menu.getLeadText());
     }
 }
