@@ -2,20 +2,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
+  Menu menu = new Menu();
+  private Scanner scanner = new Scanner(System.in);
 
-  //Rasmus
-  public void printMenu(){
-    //ArrayList here or in main ?
+  //Rasmus + Alex
+  public String printPizzaMenu(String messege){
+    return messege;
   }
-
+  // Alex
+  public int printPizzaNumber(int pizzaNumber){
+    return pizzaNumber;
+  }
   //Rasmus
   public void printOrders(ArrayList<Order> orders){
     //ArrayList here or in main ?
   }
 
-  //Rasmus
+  //Rasmus + Alex
+  // brug konstruktør fra menu
   public int readMenuChoice(){
-    Scanner scanner = new Scanner(System.in);
+
     System.out.println("Seleckt one of the following opstions: ");
     System.out.println("1. Show Menu");
     System.out.println("2. Create Order");
@@ -25,7 +31,4 @@ public class UI {
 
     return scanner.nextInt();
   }
-
-
-
 }
