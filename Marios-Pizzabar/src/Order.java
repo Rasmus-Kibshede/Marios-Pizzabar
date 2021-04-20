@@ -24,13 +24,12 @@ public class Order {
 
   }
 
-  
-
   public String getDateTime() {
     return dateTime;
   }
 
   public Order(ArrayList<Pizza> thisOrder) {
+
     orderList = thisOrder;
 
 
@@ -41,6 +40,8 @@ public class Order {
 
   public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
     orderList = thisOrder;
+
+
 
 
     LocalDateTime timeNow = LocalDateTime.now();
