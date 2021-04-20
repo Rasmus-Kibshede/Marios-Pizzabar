@@ -2,19 +2,58 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+//Jakob
 public class Order {
-  LocalDateTime dateTime;
-  double totalPrice;
-  ArrayList<Pizza> orderList = new ArrayList<>();
+  String dateTime;
+  private double totalPrice;
+  private int id;
+  private ArrayList<Pizza> orderList = new ArrayList<>();
 
   DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    // Getter
+
+  // Getter
   public double getTotalPrice() {
     return totalPrice;
+
+  }
+
+  public int getId() {
+    return id;
+
+  }
+
+  public Order(ArrayList<Pizza> thisOrder) {
+    for (int i = 0; i < thisOrder.size(); i++) {
+      thisOrder.add(thisOrder.get(i));
+    }
+
+    LocalDateTime timeNow = LocalDateTime.now();
+    LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
+    this.dateTime = timeToPickThePizza.format(formatDateTime);
+  }
+
+  public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
+    for (int i = 0; i < thisOrder.size(); i++) {
+      orderList.add(thisOrder.get(i));
+    }
+  }
+
+  public double getPizzaPrice() {
+    return 0;
+  }
+
+
+  public String toString() { // ID: #1 - Pizza Name - bestillingstidspunkt
+    return null;
+  }
+
+  String statisticsFormat() {
+    return getName + "_" + getTotalPrice();
   }
 
 }
+
 
 
 
