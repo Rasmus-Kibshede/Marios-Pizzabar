@@ -8,39 +8,37 @@ public class Register {
   private UI ui;
   private ArrayList<Order> orders;
 
-  //Rasmus
+  // Rasmus + Martin
   public void run() {
-    showStatistics();
-
     ui = new UI();
     //menu = new Menu();
     orders = new ArrayList<>();
 
     //Menu here
-  /*
-    //do while here
-    switch (menu.readChoice) {
-      case 1:
-        showMenu();
-        break;
-      case 2:
-        //create order
-        break;
-      case 3:
-        //delete order
-        break;
-      case 4:
-        //statistics
-        break;
-      case 5:
-        //quit
-        break;
-      default:
-        //Error
-    }
- */
-
-
+    int choice;
+    do {
+      choice = ui.readMenuChoice();
+      switch (choice) {
+        case 1:
+          //showMenu();
+          break;
+        case 2:
+          //create order
+          break;
+        case 3:
+          //delete order
+          break;
+        case 4:
+          showStatistics();
+          break;
+        case 5:
+          // showOrders();
+          break;
+        default:
+          System.out.println("Invalid choice");
+      }
+      System.out.println();
+    } while (choice != 6);
   }
 
 
@@ -53,7 +51,8 @@ public class Register {
   public void createOrder(ArrayList<Pizza> pizzas) {
     try {
       Order order = new Order(pizzas); // ID
-      PrintStream ps = new PrintStream("statistics");
+      PrintStream ps = new PrintStream("Marios-Pizzabar/statistics.txt");
+
       //ps.append(order.statisticsFormat());
       orders.add(order);
     } catch (FileNotFoundException e) {
@@ -77,6 +76,7 @@ public class Register {
     ArrayList<String> storage = new ArrayList<>();
     HashMap<String, Double> statistic = new HashMap<>();
 
+    // Add each line of the file to storage as strings
     try {
       Scanner input = new Scanner(new File("Marios-Pizzabar/statistics.txt"));
       while (input.hasNextLine()) {
@@ -87,6 +87,7 @@ public class Register {
       System.out.println("File not found");
     }
 
+    // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
     for (int i = 0; i < storage.size(); i++) {
       String[] arr = storage.get(i).split("_");
       String name = arr[0];
@@ -96,6 +97,7 @@ public class Register {
 
     ArrayList<String> sorted = new ArrayList<>();
 
+    // Iterates over the map, then adds it to sorted
     Iterator it = statistic.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry pair = (Map.Entry)it.next();
@@ -107,7 +109,7 @@ public class Register {
     sorted.sort(Collections.reverseOrder());
 
     for (int i = 0; i < sorted.size(); i++) {
-      System.out.println((i + 1) + ": " +sorted.get(i));
+      System.out.println((i + 1) + ": " + sorted.get(i));
     }
   }
 }
