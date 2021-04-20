@@ -29,9 +29,8 @@ public class Order {
   }
 
   public Order(ArrayList<Pizza> thisOrder) {
-    for (int i = 0; i < thisOrder.size(); i++) {
-      orderList = thisOrder;
-    }
+    orderList = thisOrder;
+
 
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
@@ -39,9 +38,7 @@ public class Order {
   }
 
   public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
-      orderList = thisOrder;
-
-
+    orderList = thisOrder;
 
 
     LocalDateTime timeNow = LocalDateTime.now();
@@ -53,16 +50,16 @@ public class Order {
     return null;
   }
 
-    // Martin
-    public ArrayList<String> statisticsFormat() {
-      ArrayList<String> lst = new ArrayList<>();
-      for (int i = 0; i < orderList.size(); i++) {
+  // Martin
+  public ArrayList<String> statisticsFormat() {
+    ArrayList<String> lst = new ArrayList<>();
+    for (int i = 0; i < orderList.size(); i++) {
       lst.add(orderList.get(i).getPizzaName() + "_" + orderList.get(i).getPizzaPrice());
     }
-      return lst;
-    }
+    return lst;
+  }
 
-    
+
 
   /* Rasmus
   public String getOrderList() {
