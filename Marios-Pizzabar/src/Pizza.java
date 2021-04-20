@@ -4,11 +4,10 @@ public class Pizza {
     double price;
     int number;
 
-    public void Pizza(String name, double price, int number){
+    public Pizza(String name, double price, int number, String toppings){
         this.name=name;
         this.price=price;
         this.number=number;
-
     }
     public int getNumber() {
         return number;
