@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -52,9 +53,9 @@ public class Register {
   }
 
   // Martin
-  public void createOrder() {
+  public void createOrder(ArrayList<Pizza> pizzas) {
     try {
-      Order order = new Order(); // ID
+      Order order = new Order(pizzas); // ID
       PrintStream ps = new PrintStream("statistics");
       //ps.append(order.statisticsFormat());
       orders.add(order);
@@ -76,30 +77,25 @@ public class Register {
 
   // Martin
   public void showStatistics() {
-    HashMap<String, Double> statisticsMap = new HashMap<>();
-    int count = 0;
+    ArrayList<String> storage = new ArrayList<>();
+    HashMap<String, Double> statistic = new HashMap<>();
+
     try {
       Scanner input = new Scanner(new File("Marios-Pizzabar/statistics.txt"));
       while (input.hasNextLine()) {
         String text = input.nextLine();
-        String[] arr = text.split("_");
-
-
-
-
+        storage.add(text);
       }
     } catch (FileNotFoundException e) {
       System.out.println("File not found");
     }
-    System.out.println(statisticsMap);
 
+    for (int i = 0; i < storage.size(); i++) {
+      String[] arr = storage.get(i).split("_");
+      String name = arr[0];
+      double price = Double.parseDouble(arr[1]);
+      statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
+    }
+    System.out.println(statistic);
   }
-
-
-
-
-
-
-
-
 }

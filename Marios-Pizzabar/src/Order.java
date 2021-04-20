@@ -52,9 +52,9 @@ public class Order {
     return null;
   }
 /*
-  String statisticsFormat() {
-    return getName + "_" + getTotalPrice();
-  }
+  //String statisticsFormat() {
+    //return getName + "_" + getTotalPrice();
+  //}
  */
 }
 
