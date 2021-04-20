@@ -5,17 +5,26 @@ public class UI {
 
     private Scanner scanner = new Scanner(System.in);
 
-    //Rasmus + Alex
-    public String printString(String messege) {
-        return messege;
-    }
-
     //Alex
-    public int printInt(int pizzaNumber) {
-        return pizzaNumber;
+    public void printString(String message) {
+        System.out.println(message);
+    }
+    //Alex
+    public String getString(String message){
+        return message;
+    }
+    //Alex
+    public int getInt() {
+        return scanner.nextInt();
+    }
+    //Alex
+    public void printInt(int pizzaNumber) {
+        System.out.println(pizzaNumber);
     }
 
-    //Rasmus + Alex
+
+
+    //Jakob + Alex
     public void printOrders(Order order) {
         System.out.println(order.getId());
         System.out.println(order.getOrderList());
@@ -24,11 +33,11 @@ public class UI {
 
     //Rasmus + Alex
 
-    public int printOptionsMenu(Menu menu) {
+    public void printOptionsMenu(Menu menu) {
         System.out.println(menu.getMenuHeader());
         System.out.println(menu.getMenuItems());
         System.out.println(menu.getLeadText());
 
-        return scanner.nextInt();
+
     }
 }
