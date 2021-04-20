@@ -16,9 +16,10 @@ public class Register {
     options.add("3" + ". Delete order:");
     options.add("4" + ". Show statistics:");
     options.add("5" + ". View orders:");
+    options.add("6" + ". Exit program:");
 
     ui = new UI();
-    menu = new Menu("Menu", "Choose: ", options);
+    menu = new Menu("Options:", "Choose: ", options);
     orders = new ArrayList<>();
 
     int choice;
@@ -39,7 +40,7 @@ public class Register {
           showStatistics();
           break;
         case 5:
-          // showOrders();
+          // viewOrders();
           break;
         case 6:
           System.out.println("Exiting program...");
@@ -70,6 +71,9 @@ public class Register {
     } catch (FileNotFoundException e) {
       System.out.println(e);
     }
+  }
+
+  public void showOrders() {
 
   }
 
