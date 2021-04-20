@@ -53,7 +53,6 @@ public class Register {
   public void createOrder(ArrayList<Pizza> pizzas) {
     try {
       Order order = new Order(pizzas); // ID
-
       PrintStream ps = new PrintStream("Marios-Pizzabar/statistics.txt");
       ArrayList<String> orderStats = order.statisticsFormat();
       for (String s : orderStats) {

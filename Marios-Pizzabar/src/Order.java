@@ -49,6 +49,7 @@ public class Order {
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
   //Hvad skulle jeg lave her?
+  // return "ID: #" + id + "navn på pizzaerne" + dateTime
   public String toString() { // ID: #1 - Pizza Name - bestillingstidspunkt
     return null;
   }
