@@ -11,6 +11,7 @@ public class Register {
   //Rasmus
   public void run() {
     showStatistics();
+
     ui = new UI();
     //menu = new Menu();
     orders = new ArrayList<>();
