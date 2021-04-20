@@ -54,20 +54,26 @@ public class Order {
     return null;
   }
 
-/*
-  //String statisticsFormat() {
-    //return getName + "_" + getTotalPrice();
-  //}
- */
-public String getOrderList() {
-  StringBuilder text = null;
-  for (int i = 0; i < orderList.size(); i++) {
-    text.append("\n").append(orderList.get(i));
-  }
-  text.append("\n");
+    // Martin
+    public ArrayList<String> statisticsFormat() {
+      ArrayList<String> lst = new ArrayList<>();
+      for (int i = 0; i < orderList.size(); i++) {
+      lst.add(orderList.get(i).getPizzaName + "_" + orderList.get(i).getPizzaPrice);
+    }
+      return lst;
+    }
 
-  return text.toString();
-}
+
+  // Rasmus
+  public String getOrderList() {
+    StringBuilder text = null;
+    for (int i = 0; i < orderList.size(); i++) {
+      text.append("\n").append(orderList.get(i));
+    }
+    text.append("\n");
+
+    return text.toString();
+  }
 }
 
 
