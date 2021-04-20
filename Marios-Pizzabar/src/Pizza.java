@@ -1,30 +1,31 @@
-//Alexander
+//Alexander + Rasmus
 public class Pizza {
-    String name;
-    double price;
-    int number;
+    String pizzaName;
+    double pizzaPrice;
+    int pizzaNumber;
+    String pizzaToppings;
 
-    public Pizza(String name, double price, int number, String toppings){
-        this.name=name;
-        this.price=price;
-        this.number=number;
+    //Alexander + Rasmus
+    public Pizza(String pizzaName, double pizzaPrice, int pizzaNumber, String pizzaToppings){
+        this.pizzaName = pizzaName;
+        this.pizzaPrice = pizzaPrice;
+        this.pizzaNumber = pizzaNumber;
+        this.pizzaToppings = pizzaToppings;
     }
-    public int getNumber() {
-        return number;
+
+    public String getPizzaName() {
+        return pizzaName;
     }
-    public double getPrice(){
-        return price;
+
+    public double getPizzaPrice() {
+        return pizzaPrice;
     }
-    public String getName(){
-        return name;
+
+    public int getPizzaNumber() {
+        return pizzaNumber;
     }
-    public void setNumber(int number) {
-        this.number = number;
-    }
-    public void setPrice(double price){
-        this.price=price;
-    }
-    public void setName(String name){
-        this.name=name;
+
+    public String getPizzaToppings() {
+        return pizzaToppings;
     }
 }
