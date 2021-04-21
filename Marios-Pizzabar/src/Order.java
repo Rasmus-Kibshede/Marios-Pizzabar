@@ -34,19 +34,19 @@ public class Order {
     count++;
     id = count;
 
-    // Skal det beholdes eller slettes??
+    // Skal det beholdes eller slettes?
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
 
-  // Skal det beholdes eller slettes??
+  // Skal det beholdes eller slettes?
   public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
     orderList = thisOrder;
     count++;
     id = count;
 
-    // Skal det beholdes eller slettes??
+    // Skal det beholdes eller slettes?
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(10);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
