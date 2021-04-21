@@ -61,22 +61,17 @@ public class Order {
 
   }
 
-  public String toString () {
-    return 
-
-  }
-
-  public String getOrderList() {
-    StringBuilder text = null;
+  public String toString() {
+    StringBuilder text = new StringBuilder();
+    text.append("#").append(id).append(" - ");
     for (int i = 0; i < orderList.size(); i++) {
-      text.append("\n").append(orderList.get(i));
+      text.append(orderList.get(i)).append(" ");
     }
-    text.append("\n");
-
+    text.append(dateTime);
     return text.toString();
+
+
   }
-
-
 }
 
 
