@@ -62,8 +62,6 @@ public class Menu {
     }
   }
 
-  // Martin
-
   public String getMenuHeader() {
     return menuHeader;
   }
