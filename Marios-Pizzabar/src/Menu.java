@@ -90,4 +90,8 @@ public class Menu {
 
     return text.toString();
   }
+
+  public ArrayList<Pizza> getMenu() {
+    return pizzaMenuList;
+  }
 }

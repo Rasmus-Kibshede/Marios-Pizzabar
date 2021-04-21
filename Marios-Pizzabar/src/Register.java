@@ -31,7 +31,7 @@ public class Register {
           showMenu();
           break;
         case 2:
-          //create order
+          createOrder();
           break;
         case 3:
           deleteOrder(ui.getInt());
@@ -40,46 +40,57 @@ public class Register {
           showStatistics();
           break;
         case 5:
-          // viewOrders();
+          viewOrders();
           break;
         case 6:
           ui.printString("Exiting program...");
+          break;
         default:
           ui.printString("Invalid choice");
       }
-      System.out.println();
+      ui.printString("");
     } while (choice != 6);
   }
 
 
   // Martin
   public void showMenu() {
-    System.out.println(menu.getPizzaMenuList());
+    ui.printString(menu.getPizzaMenuList());
   }
 
   // Martin
   public void createOrder() {
 
-
-
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    int choice = -1;
+    while (choice != 0) {
+      choice = ui.getInt();
+      for (Pizza p : menu.getMenu()) {
+        if (p.getPizzaNumber() == choice) {
+          pizzas.add(p);
+        }
+      }
+    }
 
     try {
-      Order order = new Order(pizzas); // ID
-      PrintStream ps = new PrintStream("Marios-Pizzabar/statistics.txt");
+      Order order = new Order(pizzas);
+      PrintStream ps = new PrintStream("statistics.txt");
       ArrayList<String> orderStats = order.statisticsFormat();
       for (String s : orderStats) {
         ps.append(s);
+        ps.append("\n");
       }
 
       orders.add(order);
     } catch (FileNotFoundException e) {
-      System.out.println(e);
+      ui.printString("File not found");
     }
   }
 
-  public void showOrders() {
-
+  public void viewOrders() {
+    for (Order o : orders) {
+      ui.printString(o.toString());
+    }
   }
 
   // Martin
@@ -99,13 +110,13 @@ public class Register {
 
     // Add each line of the file to storage as strings
     try {
-      Scanner input = new Scanner(new File("Marios-Pizzabar/statistics.txt"));
+      Scanner input = new Scanner(new File("statistics.txt"));
       while (input.hasNextLine()) {
         String text = input.nextLine();
         storage.add(text);
       }
     } catch (FileNotFoundException e) {
-      System.out.println("File not found");
+      ui.printString("File not found");
     }
 
     // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
@@ -130,7 +141,11 @@ public class Register {
     sorted.sort(Collections.reverseOrder());
 
     for (int i = 0; i < sorted.size(); i++) {
-      System.out.println((i + 1) + ": " + sorted.get(i));
+<<<<<<< HEAD
+     ui.printString((i + 1) + ": " + sorted.get(i));
+=======
+      ui.printString((i + 1) + ": " + sorted.get(i));
+>>>>>>> c96b3e060fbb7e080e94e1fb7c56f2946751781f
     }
   }
 }
