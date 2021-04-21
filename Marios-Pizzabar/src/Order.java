@@ -50,10 +50,6 @@ public class Order {
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
 
-  // return "ID: #" + id + "navn på pizzaerne" + dateTime
-  // ID: #1 - Pizza Name - bestillingstidspunkt
-
-
 
   // Martin
   public ArrayList<String> statisticsFormat() {
@@ -62,11 +58,14 @@ public class Order {
       lst.add(orderList.get(i).getPizzaName() + "_" + orderList.get(i).getPizzaPrice());
     }
     return lst;
+
   }
 
+  public String toString () {
+    return 
 
+  }
 
-  /* Rasmus
   public String getOrderList() {
     StringBuilder text = null;
     for (int i = 0; i < orderList.size(); i++) {
@@ -77,7 +76,7 @@ public class Order {
     return text.toString();
   }
 
-   */
+
 }
 
 
