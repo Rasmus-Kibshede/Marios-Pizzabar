@@ -39,8 +39,9 @@ public class Order {
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
-
-  public Order(ArrayList<Pizza> thisOrder, int estimatedTime) { // Skulle jeg slette den?
+  
+  // Skal det beholdes eller slettes??
+  public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
     orderList = thisOrder;
     count++;
     id = count;
