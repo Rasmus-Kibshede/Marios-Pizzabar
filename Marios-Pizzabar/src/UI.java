@@ -39,11 +39,11 @@ public class UI {
         System.out.println(menu.getLeadText());
     }
 
-    public void printOptionsMenuTest(Menu menu) {
-        System.out.println(menu.getMenuHeader());
-        for (String s : menu.getMenuOptions()) {
-            System.out.println(s);
-        }
-        System.out.println(menu.getLeadText());
-    }
+    //public void printOptionsMenuTest(Menu menu) {
+    //    System.out.println(menu.getMenuHeader());
+    //    for (String s : menu.getMenuOptions()) {
+    //        System.out.println(s);
+    //    }
+    //    System.out.println(menu.getLeadText());
+    //}
 }
