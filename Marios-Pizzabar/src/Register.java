@@ -24,7 +24,7 @@ public class Register {
 
     int choice;
     do {
-      ui.printOptionsMenuTest(menu);
+      ui.printString(menu.getMenuOptions());
       choice = ui.getInt();
       switch (choice) {
         case 1:
@@ -43,9 +43,9 @@ public class Register {
           // viewOrders();
           break;
         case 6:
-          System.out.println("Exiting program...");
+          ui.printString("Exiting program...");
         default:
-          System.out.println("Invalid choice");
+          ui.printString("Invalid choice");
       }
       System.out.println();
     } while (choice != 6);
@@ -58,7 +58,12 @@ public class Register {
   }
 
   // Martin
-  public void createOrder(ArrayList<Pizza> pizzas) {
+  public void createOrder() {
+
+
+
+    ArrayList<Pizza> pizzas = new ArrayList<>();
+
     try {
       Order order = new Order(pizzas); // ID
       PrintStream ps = new PrintStream("Marios-Pizzabar/statistics.txt");
