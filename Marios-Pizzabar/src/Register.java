@@ -11,8 +11,6 @@ public class Register {
 
   // Rasmus + Martin
   public void run() {
-
-
     ArrayList<String> options = new ArrayList<>();
     options.add("1" + ". Show Menu:");
     options.add("2" + ". Create order:");
