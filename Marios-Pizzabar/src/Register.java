@@ -11,17 +11,22 @@ public class Register {
 
   // Rasmus + Martin
   public void run() {
+
+
     ArrayList<String> options = new ArrayList<>();
     options.add("1" + ". Show Menu:");
     options.add("2" + ". Create order:");
     options.add("3" + ". Delete order:");
     options.add("4" + ". Show statistics:");
     options.add("5" + ". View orders:");
-    options.add("6" + ". Exit program:");
+    options.add("6" + ". Finish order:");
+    options.add("7" + ". Clear orders:");
+    options.add("9" + ". Exit program:");
 
     ui = new UI();
     menu = new Menu("Options:", "Choose: ", options);
     orders = new ArrayList<>();
+    loadOrder();
 
     int choice;
     do {
@@ -44,19 +49,42 @@ public class Register {
           viewOrders();
           break;
         case 6:
+          finishOrder(ui.getInt());
+          break;
+        case 7:
+          clearOrders();
+          break;
+        case 9:
           ui.printString("Exiting program...");
           break;
         default:
           ui.printString("Invalid choice");
       }
       ui.printString("");
-    } while (choice != 6);
+    } while (choice != 9);
   }
-
 
   // Martin
   public void showMenu() {
     ui.printString(menu.getPizzaMenuList());
+  }
+
+  // Martin
+  public void finishOrder(int id) {
+    try {
+      Order order = findOrder(id);
+      PrintStream ps = new PrintStream(new FileOutputStream("statistics.txt", true));
+      ArrayList<String> orderStats = order.statisticsFormat();
+
+      for (String s : orderStats) {
+        ps.append(s);
+        ps.append("\n");
+      }
+      ps.close();
+    } catch (FileNotFoundException e) {
+      ui.printString("File not found");
+    }
+    deleteOrder(id);
   }
 
   // Martin
@@ -73,21 +101,52 @@ public class Register {
         }
       }
     }
+    orders.add(new Order(pizzas));
+    saveOrder();
+  }
 
-    // Adds pizzas to an order. Order goes into a file, where it is stored permanently (for statistics)
+  // Martin
+  public void saveOrder() {
     try {
-      Order order = new Order(pizzas);
-      PrintStream ps = new PrintStream(new FileOutputStream("statistics.txt", true));
-      ArrayList<String> orderStats = order.statisticsFormat();
-
-      for (String s : orderStats) {
-        ps.append(s);
+      PrintStream ps = new PrintStream(new FileOutputStream("orders.txt"));
+      for (Order o : orders) {
+        for (Pizza p : o.getOrderList()) {
+          ps.append(String.valueOf(p.getPizzaNumber()));
+          ps.append("_");
+        }
         ps.append("\n");
       }
-      ps.close();
-      orders.add(order);
     } catch (FileNotFoundException e) {
       ui.printString("File not found");
+    }
+  }
+
+  // Martin
+  public void loadOrder() {
+    ArrayList<String> storage = new ArrayList<>();
+    ArrayList<Pizza> pizzas = new ArrayList<>();
+
+    try {
+      Scanner input = new Scanner(new File("orders.txt"));
+      while (input.hasNextLine()) {
+        String text = input.nextLine();
+        storage.add(text);
+      }
+    } catch (FileNotFoundException e) {
+      ui.printString("File not found");
+    }
+
+    for (String s : storage) {
+      String[] temp = s.split("_");
+      for (String s2 : temp) {
+        for (Pizza p : menu.getMenu()) {
+          if (Integer.parseInt(s2) == p.getPizzaNumber()) {
+            pizzas.add(p);
+          }
+        }
+      }
+      orders.add(new Order(new ArrayList<>(pizzas)));
+      pizzas.clear();
     }
   }
 
@@ -100,12 +159,17 @@ public class Register {
 
   // Martin
   public void deleteOrder(int id) {
+    orders.remove(findOrder(id));
+    saveOrder();
+  }
+
+  public Order findOrder(int id) {
     for (Order o : orders) {
       if (o.getId() == id) {
-        orders.remove(o);
-        break;
+        return o;
       }
     }
+    return null;
   }
 
   // Martin
@@ -121,31 +185,45 @@ public class Register {
         storage.add(text);
       }
       input.close();
+
+
+    System.out.println("here");
+      System.out.println(storage.size());
+
+    // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
+    if (storage.size() > 1) {
+      for (int i = 0; i < storage.size(); i++) {
+        String[] arr = storage.get(i).split("_");
+        String name = arr[0];
+        double price = Double.parseDouble(arr[1]);
+        statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
+      }
+
+      ArrayList<String> lst = new ArrayList<>();
+
+      // Iterates over the map, then adds it to lst
+      Iterator it = statistic.entrySet().iterator();
+      while (it.hasNext()) {
+        Map.Entry pair = (Map.Entry)it.next();
+        String s = "" + pair.getValue() + " \t " + pair.getKey();
+        lst.add(s);
+        it.remove();
+      }
+
+
+      for (int i = 0; i < lst.size(); i++) {
+        ui.printString((i + 1) + ": " + lst.get(i));
+      }
+    }
+
     } catch (FileNotFoundException e) {
       ui.printString("File not found");
     }
+  }
 
-    // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
-    for (int i = 0; i < storage.size(); i++) {
-      String[] arr = storage.get(i).split("_");
-      String name = arr[0];
-      double price = Double.parseDouble(arr[1]);
-      statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
-    }
-
-    ArrayList<String> lst = new ArrayList<>();
-
-    // Iterates over the map, then adds it to lst
-    Iterator it = statistic.entrySet().iterator();
-    while (it.hasNext()) {
-      Map.Entry pair = (Map.Entry)it.next();
-      String s = "" + pair.getValue() + " \t " + pair.getKey();
-      lst.add(s);
-      it.remove();
-    }
-
-    for (int i = 0; i < lst.size(); i++) {
-      ui.printString((i + 1) + ": " + lst.get(i));
-    }
+  // Martin
+  public void clearOrders() {
+    orders.clear();
+    saveOrder();
   }
 }

@@ -72,6 +72,10 @@ public class Order {
 
 
   }
+
+  public ArrayList<Pizza> getOrderList() {
+    return orderList;
+  }
 }
 
 

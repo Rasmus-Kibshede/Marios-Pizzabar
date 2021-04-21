@@ -34,9 +34,9 @@ public class UI {
     //Rasmus + Alex
 
     public void printOptionsMenu(Menu menu) {
-        System.out.println(menu.getMenuHeader());
-        System.out.println(menu.getMenuOptions());
-        System.out.println(menu.getLeadText());
+        System.out.print(menu.getMenuHeader());
+        System.out.print(menu.getMenuOptions());
+        System.out.print(menu.getLeadText());
     }
 
     //public void printOptionsMenuTest(Menu menu) {
