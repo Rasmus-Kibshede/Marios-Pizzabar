@@ -31,7 +31,7 @@ public class Register {
           showMenu();
           break;
         case 2:
-          //create order
+          createOrder();
           break;
         case 3:
           deleteOrder(ui.getInt());
@@ -40,7 +40,7 @@ public class Register {
           showStatistics();
           break;
         case 5:
-          // viewOrders();
+          viewOrders();
           break;
         case 6:
           ui.printString("Exiting program...");
@@ -61,16 +61,24 @@ public class Register {
   // Martin
   public void createOrder() {
 
-
-
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    int choice = -1;
+    while (choice != 0) {
+      choice = ui.getInt();
+      for (Pizza p : menu.getMenu()) {
+        if (p.getPizzaNumber() == choice) {
+          pizzas.add(p);
+        }
+      }
+    }
 
     try {
-      Order order = new Order(pizzas); // ID
+      Order order = new Order(pizzas);
       PrintStream ps = new PrintStream("statistics.txt");
       ArrayList<String> orderStats = order.statisticsFormat();
       for (String s : orderStats) {
         ps.append(s);
+        ps.append("\n");
       }
 
       orders.add(order);
@@ -79,8 +87,10 @@ public class Register {
     }
   }
 
-  public void showOrders() {
-
+  public void viewOrders() {
+    for (Order o : orders) {
+      ui.printString(o.toString());
+    }
   }
 
   // Martin
