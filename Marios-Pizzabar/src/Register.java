@@ -67,7 +67,7 @@ public class Register {
 
     try {
       Order order = new Order(pizzas); // ID
-      PrintStream ps = new PrintStream("Marios-Pizzabar/statistics.txt");
+      PrintStream ps = new PrintStream("statistics.txt");
       ArrayList<String> orderStats = order.statisticsFormat();
       for (String s : orderStats) {
         ps.append(s);
@@ -100,7 +100,7 @@ public class Register {
 
     // Add each line of the file to storage as strings
     try {
-      Scanner input = new Scanner(new File("Marios-Pizzabar/statistics.txt"));
+      Scanner input = new Scanner(new File("statistics.txt"));
       while (input.hasNextLine()) {
         String text = input.nextLine();
         storage.add(text);
