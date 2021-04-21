@@ -20,7 +20,7 @@ public class Order {
 
   }
 
-  public int get {
+  public int get() {
     return id;
 
   }
@@ -31,6 +31,8 @@ public class Order {
 
   public Order(ArrayList<Pizza> thisOrder) { // Konstruktør
     orderList = thisOrder;
+    count++;
+    id = count;
 
 
     LocalDateTime timeNow = LocalDateTime.now();
@@ -40,19 +42,13 @@ public class Order {
 
   public Order(ArrayList<Pizza> thisOrder, int estimatedTime) { // Skulle jeg slette den?
     orderList = thisOrder;
-
+    count++;
+    id = count;
 
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(10);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
-
-  public Order() { // Konstruktør
-    count++;
-    id = count;
-  }
-
-
 
   // return "ID: #" + id + "navn på pizzaerne" + dateTime
   // ID: #1 - Pizza Name - bestillingstidspunkt
