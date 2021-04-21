@@ -133,21 +133,19 @@ public class Register {
       statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
     }
 
-    ArrayList<String> sorted = new ArrayList<>();
+    ArrayList<String> lst = new ArrayList<>();
 
-    // Iterates over the map, then adds it to sorted
+    // Iterates over the map, then adds it to lst
     Iterator it = statistic.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry pair = (Map.Entry)it.next();
-      String s = "$" + pair.getValue() + " \t " + pair.getKey();
-      sorted.add(s);
+      String s = "" + pair.getValue() + " \t " + pair.getKey();
+      lst.add(s);
       it.remove();
     }
 
-    sorted.sort(Collections.reverseOrder());
-
-    for (int i = 0; i < sorted.size(); i++) {
-      ui.printString((i + 1) + ": " + sorted.get(i));
+    for (int i = 0; i < lst.size(); i++) {
+      ui.printString((i + 1) + ": " + lst.get(i));
     }
   }
 }
