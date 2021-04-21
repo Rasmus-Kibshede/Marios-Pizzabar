@@ -65,7 +65,7 @@ public class Order {
     StringBuilder text = new StringBuilder();
     text.append("#").append(id).append(" - ");
     for (int i = 0; i < orderList.size(); i++) {
-      text.append(orderList.get(i)).append(" ");
+      text.append(orderList.get(i).getPizzaName()).append(" ");
     }
     text.append(dateTime);
     return text.toString();
