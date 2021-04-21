@@ -183,39 +183,31 @@ public class Register {
         storage.add(text);
       }
       input.close();
-
-
-    System.out.println("here");
-      System.out.println(storage.size());
-
-    // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
-    if (storage.size() > 1) {
-      for (int i = 0; i < storage.size(); i++) {
-        String[] arr = storage.get(i).split("_");
-        String name = arr[0];
-        double price = Double.parseDouble(arr[1]);
-        statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
-      }
-
-      ArrayList<String> lst = new ArrayList<>();
-
-      // Iterates over the map, then adds it to lst
-      Iterator it = statistic.entrySet().iterator();
-      while (it.hasNext()) {
-        Map.Entry pair = (Map.Entry)it.next();
-        String s = "" + pair.getValue() + " \t " + pair.getKey();
-        lst.add(s);
-        it.remove();
-      }
-
-
-      for (int i = 0; i < lst.size(); i++) {
-        ui.printString((i + 1) + ": " + lst.get(i));
-      }
-    }
-
     } catch (FileNotFoundException e) {
       ui.printString("File not found");
+    }
+
+    // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
+    for (int i = 0; i < storage.size(); i++) {
+      String[] arr = storage.get(i).split("_");
+      String name = arr[0];
+      double price = Double.parseDouble(arr[1]);
+      statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
+    }
+
+    ArrayList<String> lst = new ArrayList<>();
+
+    // Iterates over the map, then adds it to lst
+    Iterator it = statistic.entrySet().iterator();
+    while (it.hasNext()) {
+      Map.Entry pair = (Map.Entry) it.next();
+      String s = "" + pair.getValue() + " \t " + pair.getKey();
+      lst.add(s);
+      it.remove();
+    }
+
+    for (int i = 0; i < lst.size(); i++) {
+      ui.printString((i + 1) + ": " + lst.get(i));
     }
   }
 
