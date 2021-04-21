@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -60,33 +61,37 @@ public class Register {
 
   // Martin
   public void createOrder() {
-
     ArrayList<Pizza> pizzas = new ArrayList<>();
+
+    // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
     int choice = -1;
     while (choice != 0) {
       choice = ui.getInt();
       for (Pizza p : menu.getMenu()) {
-        if (p.getPizzaNumber() == choice) {
+        if (p.getPizzaNumber() == choice && choice != 0) {
           pizzas.add(p);
         }
       }
     }
 
+    // Adds pizzas to an order. Order goes into a file, where it is stored permanently (for statistics)
     try {
       Order order = new Order(pizzas);
-      PrintStream ps = new PrintStream("statistics.txt");
+      PrintStream ps = new PrintStream(new FileOutputStream("statistics.txt", true));
       ArrayList<String> orderStats = order.statisticsFormat();
+
       for (String s : orderStats) {
         ps.append(s);
         ps.append("\n");
       }
-
+      ps.close();
       orders.add(order);
     } catch (FileNotFoundException e) {
       ui.printString("File not found");
     }
   }
 
+  // Martin
   public void viewOrders() {
     for (Order o : orders) {
       ui.printString(o.toString());
@@ -115,6 +120,7 @@ public class Register {
         String text = input.nextLine();
         storage.add(text);
       }
+      input.close();
     } catch (FileNotFoundException e) {
       ui.printString("File not found");
     }
