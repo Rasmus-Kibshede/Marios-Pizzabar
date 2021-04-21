@@ -48,14 +48,14 @@ public class Register {
         default:
           ui.printString("Invalid choice");
       }
-      System.out.println();
+      ui.printString("");
     } while (choice != 6);
   }
 
 
   // Martin
   public void showMenu() {
-    System.out.println(menu.getPizzaMenuList());
+    ui.printString(menu.getPizzaMenuList());
   }
 
   // Martin
