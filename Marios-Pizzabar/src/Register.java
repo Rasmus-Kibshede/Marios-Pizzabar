@@ -54,7 +54,7 @@ public class Register {
 
   // Martin
   public void showMenu() {
-    System.out.println(menu.getMenuList());
+    System.out.println(menu.getPizzaMenuList());
   }
 
   // Martin
