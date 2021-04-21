@@ -161,6 +161,7 @@ public class Register {
     saveOrder();
   }
 
+  // Martin
   public Order findOrder(int id) {
     for (Order o : orders) {
       if (o.getId() == id) {
