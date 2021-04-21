@@ -10,9 +10,7 @@ public class Order {
   private static int count;
   private ArrayList<Pizza> orderList = new ArrayList<>();
 
-
   DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
 
   // Getter
   public double getTotalPrice() {
@@ -27,14 +25,16 @@ public class Order {
 
   public String getDateTime() {
     return dateTime;
+
   }
 
-  public Order(ArrayList<Pizza> thisOrder) { // Konstruktør
+  // Konstruktør
+  public Order(ArrayList<Pizza> thisOrder) {
     orderList = thisOrder;
     count++;
     id = count;
 
-
+    // Skal det beholdes eller slettes??
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
@@ -45,11 +45,11 @@ public class Order {
     count++;
     id = count;
 
+    // Skal det beholdes eller slettes??
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(10);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
-
 
   // Martin
   public ArrayList<String> statisticsFormat() {
@@ -61,6 +61,7 @@ public class Order {
 
   }
 
+  // Martin + Jakob
   public String toString() {
     StringBuilder text = new StringBuilder();
     text.append("#").append(id).append(" - ");
