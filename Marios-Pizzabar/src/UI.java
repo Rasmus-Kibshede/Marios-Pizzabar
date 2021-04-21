@@ -35,7 +35,7 @@ public class UI {
 
     public void printOptionsMenu(Menu menu) {
         System.out.println(menu.getMenuHeader());
-        //System.out.println(menu.getMenuItemsTest());
+        System.out.println(menu.getMenuOptions());
         System.out.println(menu.getLeadText());
     }
 

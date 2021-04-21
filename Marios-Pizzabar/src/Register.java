@@ -24,7 +24,7 @@ public class Register {
 
     int choice;
     do {
-      ui.printString(menu.getMenuOptions());
+      ui.printOptionsMenu(menu);
       choice = ui.getInt();
       switch (choice) {
         case 1:
