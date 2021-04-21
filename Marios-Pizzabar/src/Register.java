@@ -44,6 +44,7 @@ public class Register {
           break;
         case 6:
           ui.printString("Exiting program...");
+          break;
         default:
           ui.printString("Invalid choice");
       }
@@ -74,7 +75,7 @@ public class Register {
 
       orders.add(order);
     } catch (FileNotFoundException e) {
-      System.out.println(e);
+      ui.printString("File not found");
     }
   }
 
@@ -105,7 +106,7 @@ public class Register {
         storage.add(text);
       }
     } catch (FileNotFoundException e) {
-      System.out.println("File not found");
+      ui.printString("File not found");
     }
 
     // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
@@ -130,7 +131,7 @@ public class Register {
     sorted.sort(Collections.reverseOrder());
 
     for (int i = 0; i < sorted.size(); i++) {
-      System.out.println((i + 1) + ": " + sorted.get(i));
+      ui.printString((i + 1) + ": " + sorted.get(i));
     }
   }
 }
