@@ -173,10 +173,16 @@ public class Register {
 
   // Martin
   public void showStatistics() {
-    ArrayList<String> storage = new ArrayList<>();
-    HashMap<String, Double> statistic = new HashMap<>();
+    ArrayList<String> storage = fileToList();
+    HashMap<String, Double> map = addToMap(storage);
+    iterateMap(map);
 
-    // Add each line of the file to storage as strings
+  }
+
+  // Martin
+  public ArrayList<String> fileToList() {
+    ArrayList<String> storage = new ArrayList<>();
+
     try {
       Scanner input = new Scanner(new File("statistics.txt"));
       while (input.hasNextLine()) {
@@ -187,6 +193,12 @@ public class Register {
     } catch (FileNotFoundException e) {
       ui.printString("File not found");
     }
+    return storage;
+  }
+
+  // Martin
+  public HashMap<String, Double> addToMap(ArrayList<String> storage) {
+    HashMap<String, Double> statistic = new HashMap<>();
 
     // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
     for (int i = 0; i < storage.size(); i++) {
@@ -195,7 +207,11 @@ public class Register {
       double price = Double.parseDouble(arr[1]);
       statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
     }
+    return statistic;
+  }
 
+  // Martin
+  public void iterateMap(HashMap<String, Double> statistic) {
     ArrayList<String> lst = new ArrayList<>();
 
     // Iterates over the map, then adds it to lst
