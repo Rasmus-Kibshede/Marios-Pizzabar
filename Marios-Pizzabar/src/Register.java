@@ -141,7 +141,11 @@ public class Register {
     sorted.sort(Collections.reverseOrder());
 
     for (int i = 0; i < sorted.size(); i++) {
+<<<<<<< HEAD
+     ui.printString((i + 1) + ": " + sorted.get(i));
+=======
       ui.printString((i + 1) + ": " + sorted.get(i));
+>>>>>>> c96b3e060fbb7e080e94e1fb7c56f2946751781f
     }
   }
 }
