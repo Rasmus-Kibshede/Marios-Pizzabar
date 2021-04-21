@@ -2,7 +2,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-//Jakob
+
 public class Order {
   private String dateTime;
   private double totalPrice;
