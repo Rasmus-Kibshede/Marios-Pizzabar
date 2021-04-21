@@ -7,6 +7,7 @@ public class Order {
   private String dateTime;
   private double totalPrice;
   private int id;
+  private static int count;
   private ArrayList<Pizza> orderList = new ArrayList<>();
 
 
@@ -19,7 +20,7 @@ public class Order {
 
   }
 
-  public int getId() {
+  public int get {
     return id;
 
   }
@@ -28,8 +29,7 @@ public class Order {
     return dateTime;
   }
 
-  public Order(ArrayList<Pizza> thisOrder) {
-
+  public Order(ArrayList<Pizza> thisOrder) { // Konstruktør
     orderList = thisOrder;
 
 
@@ -38,21 +38,26 @@ public class Order {
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
 
-  public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
+  public Order(ArrayList<Pizza> thisOrder, int estimatedTime) { // Skulle jeg slette den?
     orderList = thisOrder;
-
-
 
 
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(10);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
-  //Hvad skulle jeg lave her?
-  // return "ID: #" + id + "navn på pizzaerne" + dateTime
-  public String toString() { // ID: #1 - Pizza Name - bestillingstidspunkt
-    return null;
+
+  public Order() { // Konstruktør
+    count++;
+    id = count;
   }
+
+
+
+  // return "ID: #" + id + "navn på pizzaerne" + dateTime
+  // ID: #1 - Pizza Name - bestillingstidspunkt
+
+
 
   // Martin
   public ArrayList<String> statisticsFormat() {
