@@ -39,7 +39,7 @@ public class Order {
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
-  
+
   // Skal det beholdes eller slettes??
   public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
     orderList = thisOrder;
