@@ -9,14 +9,22 @@ public class UI {
     public void printString(String message) {
         System.out.println(message);
     }
-    //Alex
-    public String getString(String message){
-        return message;
+
+    //Alex + Rasmus
+    public String getString(){
+        return scanner.nextLine();
     }
     //Alex
     public int getInt() {
         return scanner.nextInt();
     }
+
+
+    // Rasmus
+    public boolean hasNextInt(){
+        return scanner.hasNextInt();
+    }
+
     //Alex
     public void printInt(int pizzaNumber) {
         System.out.println(pizzaNumber);

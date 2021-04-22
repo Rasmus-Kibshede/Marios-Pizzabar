@@ -29,7 +29,7 @@ public class Register {
     int choice;
     do {
       ui.printOptionsMenu(menu);
-      choice = ui.getInt();
+      choice = validateChoice("Invalid choice");
       switch (choice) {
         case 1:
           showMenu();
@@ -92,15 +92,20 @@ public class Register {
     // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
     int choice = -1;
     while (choice != 0) {
-      choice = ui.getInt();
-      for (Pizza p : menu.getMenu()) {
-        if (p.getPizzaNumber() == choice && choice != 0) {
-          pizzas.add(p);
+      choice = validateChoice("Invalid choice");
+
+      //Validate range
+      if (choice >= 1 && choice <= 30) {
+        for (Pizza p : menu.getMenu()) {
+          if (p.getPizzaNumber() == choice && choice != 0) {
+            pizzas.add(p);
+          }
         }
+        orders.add(new Order(pizzas));
+        saveOrder();
       }
     }
-    orders.add(new Order(pizzas));
-    saveOrder();
+
   }
 
   // Martin
@@ -232,5 +237,20 @@ public class Register {
   public void clearOrders() {
     orders.clear();
     saveOrder();
+  }
+
+  public int validateChoice(String text) {
+    int choice = -1;
+    while (choice == -1) {
+      if (ui.hasNextInt()) {
+        choice = ui.getInt();
+        ui.getString();
+      } else {
+        ui.printString(text);
+        //ui.printString();
+        ui.getString();
+      }
+    }
+    return choice;
   }
 }
