@@ -31,7 +31,10 @@ public class Order {
 
   public void setName(String name) {
     this.name = name;
+  }
 
+  public String getName() {
+    return name;
   }
 
 
@@ -67,7 +70,6 @@ public class Order {
       lst.add(orderList.get(i).getPizzaName() + "_" + orderList.get(i).getPizzaPrice());
     }
     return lst;
-
   }
 
   // Martin + Jakob
