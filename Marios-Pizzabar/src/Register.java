@@ -53,7 +53,8 @@ public class Register {
 
   // Martin
   public void finishOrder() {
-    int id = isValidId();
+    int id = getValidId();
+    if (id != 0) {
       try {
         Order order = findOrder(id);
         PrintStream ps = new PrintStream(new FileOutputStream("statistics.txt", true));
@@ -68,6 +69,9 @@ public class Register {
         ui.printString("File not found");
       }
       deleteOrder(id);
+    }
+
+    ui.printString("Finished order #" + id);
 
   }
 
@@ -158,7 +162,7 @@ public class Register {
     }
   }
 
-  public int isValidId() {
+  public int getValidId() {
     ui.printStringAppend("Enter order ID: ");
     int id = validateChoice("Invalid choice");
     if (orderIds().contains(id)) {
@@ -171,7 +175,7 @@ public class Register {
 
   // Martin
   public void deleteOrder() {
-    int id = isValidId();
+    int id = getValidId();
     orders.remove(findOrder(id));
     saveOrder();
   }
