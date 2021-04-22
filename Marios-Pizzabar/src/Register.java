@@ -75,11 +75,18 @@ public class Register {
 
   }
 
-  // Martin
+  // Martin + Rasmus
   public void createOrder() {
     ArrayList<Pizza> pizzas = new ArrayList<>();
-    ui.printStringAppend("Name: ");
-    String name = ui.getString();
+    String temp;
+
+    ui.printStringAppend("Pick up? (y/n) : ");
+    String pickUp = ui.getString();
+    if (pickUp.equals("y")) {
+      temp = "Called";
+    } else {
+      temp = "In store";
+    }
     ui.printString("Select your order - type 0 to finish");
 
     int count = 1;
@@ -103,7 +110,7 @@ public class Register {
         }
       count++;
       }
-    Order order = new Order(pizzas, name);
+    Order order = new Order(pizzas, temp);
 
     ui.printStringAppend("Total price: $");
     ui.printStringAppend(String.valueOf(order.totalPricePizza()));
@@ -118,7 +125,7 @@ public class Register {
     try {
       PrintStream ps = new PrintStream(new FileOutputStream("orders.txt"));
       for (Order o : orders) {
-        ps.append(o.getName());
+        ps.append(o.getPickUpStatus());
         ps.append("_");
         for (Pizza p : o.getOrderList()) {
 

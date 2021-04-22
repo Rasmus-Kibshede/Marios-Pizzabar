@@ -38,7 +38,7 @@ public class Pizza {
                 .append(pizzaPrice)
                 .append("\t ")
                 .append(pizzaName)
-                .append(":\t")
+                .append(":\t\t\t\t\t")
                 .append(pizzaToppings);
         return text.toString();
     }

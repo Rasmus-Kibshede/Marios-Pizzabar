@@ -8,8 +8,8 @@ public class Order {
   private double totalPrice;
   private int id;
   private static int count;
-  private String name;
-  private ArrayList<Pizza> orderList = new ArrayList<>();
+  private String pickUpStatus;
+  private ArrayList<Pizza> orderList;
 
   DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
@@ -29,12 +29,12 @@ public class Order {
 
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setPickUpStatus(String pickUpStatus) {
+    this.pickUpStatus = pickUpStatus;
   }
 
-  public String getName() {
-    return name;
+  public String getPickUpStatus() {
+    return pickUpStatus;
   }
 
 
@@ -53,7 +53,7 @@ public class Order {
 
   public Order(ArrayList<Pizza> thisOrder, String name) {
     orderList = thisOrder;
-    setName(name);
+    setPickUpStatus(name);
     count++;
     id = count;
 
@@ -75,14 +75,14 @@ public class Order {
   // Martin + Jakob
   public String toString() {
     StringBuilder text = new StringBuilder();
-    text.append("#").append(id).append(" ").append(name).append(" - ");
-    for (int i = 0; i < orderList.size(); i++) {
-      text.append(orderList.get(i).getPizzaName()).append(" ");
+    text.append("#").append(id).append(" ").append(pickUpStatus).append(" - ");
+    for (int i = 0; i < orderList.size() - 1; i++) {
+      text.append(orderList.get(i).getPizzaName()).append(", ");
     }
+    text.append(orderList.get(orderList.size() - 1).getPizzaName()).append(" ");
     text.append(dateTime);
+
     return text.toString();
-
-
   }
 
   public ArrayList<Pizza> getOrderList() {
