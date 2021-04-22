@@ -31,7 +31,10 @@ public class Order {
 
   public void setName(String name) {
     this.name = name;
+  }
 
+  public String getName() {
+    return name;
   }
 
 
@@ -67,13 +70,12 @@ public class Order {
       lst.add(orderList.get(i).getPizzaName() + "_" + orderList.get(i).getPizzaPrice());
     }
     return lst;
-
   }
 
   // Martin + Jakob
   public String toString() {
     StringBuilder text = new StringBuilder();
-    text.append("#").append(id).append(" - ");
+    text.append("#").append(id).append(" ").append(name).append(" - ");
     for (int i = 0; i < orderList.size(); i++) {
       text.append(orderList.get(i).getPizzaName()).append(" ");
     }

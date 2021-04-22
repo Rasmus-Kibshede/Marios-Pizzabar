@@ -78,7 +78,10 @@ public class Register {
   // Martin
   public void createOrder() {
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    ui.printStringAppend("Name: ");
+    String name = ui.getString();
     ui.printString("Select your order - type 0 to finish");
+
     int count = 1;
 
     // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
@@ -100,7 +103,7 @@ public class Register {
         }
       count++;
       }
-    Order order = new Order(pizzas);
+    Order order = new Order(pizzas, name);
 
     ui.printStringAppend("Total price: $");
     ui.printStringAppend(String.valueOf(order.totalPricePizza()));
@@ -115,7 +118,10 @@ public class Register {
     try {
       PrintStream ps = new PrintStream(new FileOutputStream("orders.txt"));
       for (Order o : orders) {
+        ps.append(o.getName());
+        ps.append("_");
         for (Pizza p : o.getOrderList()) {
+
           ps.append(String.valueOf(p.getPizzaNumber()));
           ps.append("_");
         }
@@ -130,6 +136,7 @@ public class Register {
   public void loadOrder() {
     ArrayList<String> storage = new ArrayList<>();
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    String name;
 
     try {
       Scanner input = new Scanner(new File("orders.txt"));
@@ -143,14 +150,18 @@ public class Register {
 
     for (String s : storage) {
       String[] temp = s.split("_");
-      for (String s2 : temp) {
+      name = temp[0];
+
+      //for (String s2 : temp) {
+        for (int i = 1; i < temp.length; i++) {
+
         for (Pizza p : menu.getMenu()) {
-          if (Integer.parseInt(s2) == p.getPizzaNumber()) {
+          if (Integer.parseInt(temp[i]) == p.getPizzaNumber()) {
             pizzas.add(p);
           }
         }
       }
-      orders.add(new Order(new ArrayList<>(pizzas)));
+      orders.add(new Order(new ArrayList<>(pizzas), name));
       pizzas.clear();
     }
   }
