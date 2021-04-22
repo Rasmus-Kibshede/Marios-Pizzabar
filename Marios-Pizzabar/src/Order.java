@@ -28,6 +28,7 @@ public class Order {
 
   }
 
+
   // Konstruktør
   public Order(ArrayList<Pizza> thisOrder) {
     orderList = thisOrder;
@@ -78,7 +79,18 @@ public class Order {
   public ArrayList<Pizza> getOrderList() {
     return orderList;
   }
+
+  public double totalPricePizza() {
+    double sum = 0;
+    for (int i = 0; i < orderList.size(); i++) {
+      sum += orderList.get(i).getPizzaPrice();
+    }
+
+    return sum;
+  }
+
 }
+
 
 
 
