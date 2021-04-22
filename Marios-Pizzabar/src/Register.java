@@ -218,7 +218,7 @@ public class Register {
     Iterator it = statistic.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry pair = (Map.Entry) it.next();
-      String s = "" + pair.getValue() + " \t " + pair.getKey();
+      String s = "$" + pair.getValue() + " \t " + pair.getKey();
       lst.add(s);
       it.remove();
     }
