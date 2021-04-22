@@ -10,6 +10,10 @@ public class UI {
         System.out.println(message);
     }
 
+    public void printStringAppend(String message) {
+        System.out.print(message);
+    }
+
     //Alex + Rasmus
     public String getString(){
         return scanner.nextLine();

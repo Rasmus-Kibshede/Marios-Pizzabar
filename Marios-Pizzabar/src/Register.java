@@ -88,19 +88,24 @@ public class Register {
   // Martin
   public void createOrder() {
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    ui.printString("Select your order - type 0 to finish");
+    int count = 1;
 
     // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
     int choice = -1;
     while (choice != 0) {
+      ui.printStringAppend("Pizza " + count + ": ");
       choice = validateChoice("Invalid choice");
 
       //Validate range
-      if (choice >= 1 && choice <= 30) {
+      if (isValidRange(1,30,choice)) {
+
         for (Pizza p : menu.getMenu()) {
           if (p.getPizzaNumber() == choice && choice != 0) {
             pizzas.add(p);
           }
         }
+        count++;
         orders.add(new Order(pizzas));
         saveOrder();
       }
@@ -252,5 +257,17 @@ public class Register {
       }
     }
     return choice;
+  }
+  public boolean isValidRange(int range1 ,int range2, int choice){
+    boolean flag = choice>=range1 && choice<=range2;
+    if (flag){
+      return true;
+    }
+    else if (!flag && choice != 0){
+      ui.printString("Invalid Range");
+      return false;
+    }else {
+      return false;
+    }
   }
 }
