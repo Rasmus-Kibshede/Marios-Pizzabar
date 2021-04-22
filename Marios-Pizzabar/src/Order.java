@@ -8,6 +8,7 @@ public class Order {
   private double totalPrice;
   private int id;
   private static int count;
+  private String name;
   private ArrayList<Pizza> orderList = new ArrayList<>();
 
   DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -28,6 +29,11 @@ public class Order {
 
   }
 
+  public void setName(String name) {
+    this.name = name;
+
+  }
+
 
   // Konstruktør
   public Order(ArrayList<Pizza> thisOrder) {
@@ -41,9 +47,10 @@ public class Order {
     this.dateTime = timeToPickThePizza.format(formatDateTime);
   }
 
-  // Skal det beholdes eller slettes?
-  public Order(ArrayList<Pizza> thisOrder, int estimatedTime) {
+
+  public Order(ArrayList<Pizza> thisOrder, String name) {
     orderList = thisOrder;
+    setName(name);
     count++;
     id = count;
 
