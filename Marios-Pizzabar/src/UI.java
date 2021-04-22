@@ -20,8 +20,8 @@ public class UI {
 
 
     // Rasmus
-    public void hasNextInt(){
-        scanner.hasNextInt();
+    public boolean hasNextInt(){
+        return scanner.hasNextInt();
     }
 
     //Alex
