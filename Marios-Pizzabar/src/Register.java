@@ -93,16 +93,19 @@ public class Register {
     int choice = -1;
     while (choice != 0) {
       choice = validateChoice("Invalid choice");
+
+      //Validate range
       if (choice >= 1 && choice <= 30) {
         for (Pizza p : menu.getMenu()) {
           if (p.getPizzaNumber() == choice && choice != 0) {
             pizzas.add(p);
           }
         }
+        orders.add(new Order(pizzas));
+        saveOrder();
       }
     }
-    orders.add(new Order(pizzas));
-    saveOrder();
+
   }
 
   // Martin
