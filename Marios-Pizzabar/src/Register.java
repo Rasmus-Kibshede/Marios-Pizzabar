@@ -30,33 +30,17 @@ public class Register {
     do {
       ui.printOptionsMenu(menu);
       choice = validateChoice("Invalid choice");
+
       switch (choice) {
-        case 1:
-          showMenu();
-          break;
-        case 2:
-          createOrder();
-          break;
-        case 3:
-          deleteOrder(ui.getInt());
-          break;
-        case 4:
-          showStatistics();
-          break;
-        case 5:
-          viewOrders();
-          break;
-        case 6:
-          finishOrder(ui.getInt());
-          break;
-        case 7:
-          clearOrders();
-          break;
-        case 9:
-          ui.printString("Exiting program...");
-          break;
-        default:
-          ui.printString("Invalid choice");
+        case 1 -> showMenu();
+        case 2 -> createOrder();
+        case 3 -> deleteOrder();
+        case 4 -> showStatistics();
+        case 5 -> viewOrders();
+        case 6 -> finishOrder();
+        case 7 -> clearOrders();
+        case 9 -> ui.printString("Exiting program...");
+        default -> ui.printString("Invalid choice");
       }
       ui.printString("");
     } while (choice != 9);
@@ -68,27 +52,36 @@ public class Register {
   }
 
   // Martin
-  public void finishOrder(int id) {
-    try {
-      Order order = findOrder(id);
-      PrintStream ps = new PrintStream(new FileOutputStream("statistics.txt", true));
-      ArrayList<String> orderStats = order.statisticsFormat();
+  public void finishOrder() {
+    int id = getValidId();
+    if (id != 0) {
+      try {
+        Order order = findOrder(id);
+        PrintStream ps = new PrintStream(new FileOutputStream("statistics.txt", true));
+        ArrayList<String> orderStats = order.statisticsFormat();
 
-      for (String s : orderStats) {
-        ps.append(s);
-        ps.append("\n");
+        for (String s : orderStats) {
+          ps.append(s);
+          ps.append("\n");
+        }
+        ps.close();
+      } catch (FileNotFoundException e) {
+        ui.printString("File not found");
       }
-      ps.close();
-    } catch (FileNotFoundException e) {
-      ui.printString("File not found");
+      deleteOrder(id);
     }
-    deleteOrder(id);
+
+    ui.printString("Finished order #" + id);
+
   }
 
   // Martin
   public void createOrder() {
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    ui.printStringAppend("Name: ");
+    String name = ui.getString();
     ui.printString("Select your order - type 0 to finish");
+
     int count = 1;
 
     // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
@@ -98,13 +91,10 @@ public class Register {
       choice = validateChoice("Invalid choice");
 
       //Validate range
-
       while (!isValidRange(1, 30, choice)){
         ui.printString("Out of range");
         choice = validateChoice("Invalid choice");
       }
-
-
 
         for (Pizza p : menu.getMenu()) {
           if (p.getPizzaNumber() == choice && choice != 0) {
@@ -113,7 +103,13 @@ public class Register {
         }
       count++;
       }
-    orders.add(new Order(pizzas));
+    Order order = new Order(pizzas, name);
+
+    ui.printStringAppend("Total price: $");
+    ui.printStringAppend(String.valueOf(order.totalPricePizza()));
+    ui.printString("");
+    orders.add(order);
+
     saveOrder();
   }
 
@@ -122,7 +118,10 @@ public class Register {
     try {
       PrintStream ps = new PrintStream(new FileOutputStream("orders.txt"));
       for (Order o : orders) {
+        ps.append(o.getName());
+        ps.append("_");
         for (Pizza p : o.getOrderList()) {
+
           ps.append(String.valueOf(p.getPizzaNumber()));
           ps.append("_");
         }
@@ -137,6 +136,7 @@ public class Register {
   public void loadOrder() {
     ArrayList<String> storage = new ArrayList<>();
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    String name;
 
     try {
       Scanner input = new Scanner(new File("orders.txt"));
@@ -150,14 +150,18 @@ public class Register {
 
     for (String s : storage) {
       String[] temp = s.split("_");
-      for (String s2 : temp) {
+      name = temp[0];
+
+      //for (String s2 : temp) {
+        for (int i = 1; i < temp.length; i++) {
+
         for (Pizza p : menu.getMenu()) {
-          if (Integer.parseInt(s2) == p.getPizzaNumber()) {
+          if (Integer.parseInt(temp[i]) == p.getPizzaNumber()) {
             pizzas.add(p);
           }
         }
       }
-      orders.add(new Order(new ArrayList<>(pizzas)));
+      orders.add(new Order(new ArrayList<>(pizzas), name));
       pizzas.clear();
     }
   }
@@ -170,6 +174,33 @@ public class Register {
   }
 
   // Martin
+  public int getValidId() {
+    ui.printStringAppend("Enter order ID: ");
+    int id = validateChoice("Invalid choice");
+    if (orderIds().contains(id)) {
+      return id;
+    } else {
+      ui.printString("Not a valid ID");
+    }
+    return 0;
+  }
+
+  // Martin
+  public ArrayList<Integer> orderIds() {
+    ArrayList<Integer> ids = new ArrayList<>();
+    for (Order o : orders) {
+      ids.add(o.getId());
+    }
+    return ids;
+  }
+
+  // Martin
+  public void deleteOrder() {
+    int id = getValidId();
+    orders.remove(findOrder(id));
+    saveOrder();
+  }
+
   public void deleteOrder(int id) {
     orders.remove(findOrder(id));
     saveOrder();
@@ -190,7 +221,6 @@ public class Register {
     ArrayList<String> storage = fileToList();
     HashMap<String, Double> map = addToMap(storage);
     iterateMap(map);
-
   }
 
   // Martin
@@ -244,8 +274,13 @@ public class Register {
 
   // Martin
   public void clearOrders() {
-    orders.clear();
-    saveOrder();
+    ui.printString("Are you sure you want to clear the orders? \"y\" to clear.");
+    ui.printStringAppend("Choice: ");
+    String s = ui.getString();
+    if (s.equals("y")) {
+      orders.clear();
+      saveOrder();
+    }
   }
 
   public int validateChoice(String text) {
@@ -253,22 +288,15 @@ public class Register {
     while (choice == -1) {
       if (ui.hasNextInt()) {
         choice = ui.getInt();
-        ui.getString();
       } else {
         ui.printString(text);
-        //ui.printString();
-        ui.getString();
       }
+      ui.getString();
     }
     return choice;
   }
   public boolean isValidRange(int range1 ,int range2, int choice){
-    boolean flag = choice>=range1 && choice<=range2 || choice == 0;
-    if (flag){
-      return true;
-    }else {
-      return false;
-    }
+    return choice>=range1 && choice<=range2 || choice == 0;
     /*else if (!flag && choice != 0){
       ui.printString("Invalid Range");
       return false;
