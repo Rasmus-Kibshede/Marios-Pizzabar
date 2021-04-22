@@ -162,6 +162,7 @@ public class Register {
     }
   }
 
+  // Martin
   public int getValidId() {
     ui.printStringAppend("Enter order ID: ");
     int id = validateChoice("Invalid choice");
@@ -174,18 +175,19 @@ public class Register {
   }
 
   // Martin
-  public void deleteOrder() {
-    int id = getValidId();
-    orders.remove(findOrder(id));
-    saveOrder();
-  }
-
   public ArrayList<Integer> orderIds() {
     ArrayList<Integer> ids = new ArrayList<>();
     for (Order o : orders) {
       ids.add(o.getId());
     }
     return ids;
+  }
+
+  // Martin
+  public void deleteOrder() {
+    int id = getValidId();
+    orders.remove(findOrder(id));
+    saveOrder();
   }
 
   public void deleteOrder(int id) {
@@ -208,7 +210,6 @@ public class Register {
     ArrayList<String> storage = fileToList();
     HashMap<String, Double> map = addToMap(storage);
     iterateMap(map);
-
   }
 
   // Martin
@@ -276,22 +277,15 @@ public class Register {
     while (choice == -1) {
       if (ui.hasNextInt()) {
         choice = ui.getInt();
-        ui.getString();
       } else {
         ui.printString(text);
-        //ui.printString();
-        ui.getString();
       }
+      ui.getString();
     }
     return choice;
   }
   public boolean isValidRange(int range1 ,int range2, int choice){
-    boolean flag = choice>=range1 && choice<=range2 || choice == 0;
-    if (flag){
-      return true;
-    }else {
-      return false;
-    }
+    return choice>=range1 && choice<=range2 || choice == 0;
     /*else if (!flag && choice != 0){
       ui.printString("Invalid Range");
       return false;
