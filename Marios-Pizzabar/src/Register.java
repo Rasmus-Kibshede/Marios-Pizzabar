@@ -15,10 +15,10 @@ public class Register {
     ArrayList<String> options = new ArrayList<>();
     options.add("1" + ". Show Menu:");
     options.add("2" + ". Create order:");
-    options.add("3" + ". Delete order:");
-    options.add("4" + ". Show statistics:");
-    options.add("5" + ". View orders:");
-    options.add("6" + ". Finish order:");
+    options.add("3" + ". View orders:");
+    options.add("4" + ". Finish order:");
+    options.add("5" + ". Delete order:");
+    options.add("6" + ". Show statistics:");
     options.add("7" + ". Clear orders:");
     options.add("9" + ". Exit program:");
 
@@ -33,13 +33,13 @@ public class Register {
       choice = validateChoice("Invalid choice");
 
       switch (choice) {
-        case 1 -> showMenu();
-        case 2 -> createOrder();
-        case 3 -> deleteOrder();
-        case 4 -> showStatistics();
-        case 5 -> viewOrders();
-        case 6 -> finishOrder();
-        case 7 -> clearOrders();
+        case 1 -> showMenu(); // SHOW
+        case 2 -> createOrder(); // CREAT
+        case 3 -> viewOrders(); // VIEW
+        case 4 -> finishOrder(); // FINISH
+        case 5 -> deleteOrder(); // DELETE
+        case 6 -> showStatistics(); // STATS
+        case 7 -> clearOrders(); // CLEAR
         case 9 -> ui.printString("Exiting program...");
         default -> ui.printString("Invalid choice");
       }
@@ -144,7 +144,7 @@ public class Register {
   public void loadOrder() {
     ArrayList<String> storage = new ArrayList<>();
     ArrayList<Pizza> pizzas = new ArrayList<>();
-    String name;
+    String status;
 
     try {
       Scanner input = new Scanner(new File("orders.txt"));
@@ -158,10 +158,9 @@ public class Register {
 
     for (String s : storage) {
       String[] temp = s.split("_");
-      name = temp[0];
+      status = temp[0];
 
-      //for (String s2 : temp) {
-        for (int i = 1; i < temp.length; i++) {
+      for (int i = 1; i < temp.length; i++) {
 
         for (Pizza p : menu.getMenu()) {
           if (Integer.parseInt(temp[i]) == p.getPizzaNumber()) {
@@ -169,7 +168,7 @@ public class Register {
           }
         }
       }
-      orders.add(new Order(new ArrayList<>(pizzas), name));
+      orders.add(new Order(new ArrayList<>(pizzas), status));
       pizzas.clear();
     }
   }
@@ -303,14 +302,7 @@ public class Register {
     }
     return choice;
   }
-  public boolean isValidRange(int range1 ,int range2, int choice){
-    return choice>=range1 && choice<=range2 || choice == 0;
-    /*else if (!flag && choice != 0){
-      ui.printString("Invalid Range");
-      return false;
-    }
-
-     */
-
+  public boolean isValidRange(int range1 ,int range2, int choice) {
+    return choice >= range1 && choice <= range2 || choice == 0;
   }
 }
