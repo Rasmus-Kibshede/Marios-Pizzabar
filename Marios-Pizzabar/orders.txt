@@ -1,3 +1,6 @@
-Called_4_5_
-In store_3_
-In store_3_6_5_4_3_8_6_5_3_2_
+[36mIn store[0m_1_2_3_
+[34mCalled[0m_1_
+[34mCalled[0m_1_2_3_
+[36mIn store[0m_1_2_3_
+[34mCalled[0m_1_2_3_
+[36mIn store[0m_1_2_3_

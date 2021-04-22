@@ -4,6 +4,15 @@ import java.util.Scanner;
 public class UI {
 
     private Scanner scanner = new Scanner(System.in);
+    private Color colorClass = new Color();
+
+
+    public void printColor(String color, String message) {
+        System.out.println(colorClass.colorText(color, message));
+    }
+    public String getColorString(String color, String message) {
+        return colorClass.colorText(color, message);
+    }
 
     //Alex
     public void printString(String message) {

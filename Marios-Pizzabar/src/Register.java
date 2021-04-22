@@ -8,6 +8,7 @@ public class Register {
   private Menu menu;
   private UI ui;
   private ArrayList<Order> orders;
+  private Color color = new Color();
 
   // Rasmus + Martin
   public void run() {
@@ -83,9 +84,9 @@ public class Register {
     ui.printStringAppend("Pick up? (y/n) : ");
     String pickUp = ui.getString();
     if (pickUp.equals("y")) {
-      temp = "Called";
+      temp = ui.getColorString("blue", "Called");
     } else {
-      temp = "In store";
+      temp = ui.getColorString("cyan", "In store");
     }
     ui.printString("Select your order - type 0 to finish");
 
@@ -99,7 +100,7 @@ public class Register {
 
       //Validate range
       while (!isValidRange(1, 30, choice)){
-        ui.printString("Out of range");
+        ui.printColor("red", "Out of range");
         choice = validateChoice("Invalid choice");
       }
 
@@ -112,8 +113,8 @@ public class Register {
       }
     Order order = new Order(pizzas, temp);
 
-    ui.printStringAppend("Total price: $");
-    ui.printStringAppend(String.valueOf(order.totalPricePizza()));
+    ui.printStringAppend("Total price: ");
+    ui.printStringAppend(ui.getColorString("green", "$" + String.valueOf(order.totalPricePizza())));
     ui.printString("");
     orders.add(order);
 
@@ -135,7 +136,7 @@ public class Register {
         ps.append("\n");
       }
     } catch (FileNotFoundException e) {
-      ui.printString("File not found");
+      ui.printColor("red","File not found");
     }
   }
 
@@ -152,7 +153,7 @@ public class Register {
         storage.add(text);
       }
     } catch (FileNotFoundException e) {
-      ui.printString("File not found");
+      ui.printColor("red","File not found");
     }
 
     for (String s : storage) {
@@ -187,7 +188,7 @@ public class Register {
     if (orderIds().contains(id)) {
       return id;
     } else {
-      ui.printString("Not a valid ID");
+      ui.printColor("red","Not a valid ID");
     }
     return 0;
   }
@@ -242,7 +243,7 @@ public class Register {
       }
       input.close();
     } catch (FileNotFoundException e) {
-      ui.printString("File not found");
+      ui.printColor("red", "File not found");
     }
     return storage;
   }
@@ -281,7 +282,7 @@ public class Register {
 
   // Martin
   public void clearOrders() {
-    ui.printString("Are you sure you want to clear the orders? \"y\" to clear.");
+    ui.printColor("yellow", "Are you sure you want to clear the orders? \"y\" to clear.");
     ui.printStringAppend("Choice: ");
     String s = ui.getString();
     if (s.equals("y")) {
@@ -296,7 +297,7 @@ public class Register {
       if (ui.hasNextInt()) {
         choice = ui.getInt();
       } else {
-        ui.printString(text);
+        ui.printColor("red", text);
       }
       ui.getString();
     }
