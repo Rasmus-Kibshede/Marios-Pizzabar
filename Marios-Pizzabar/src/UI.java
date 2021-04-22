@@ -10,14 +10,9 @@ public class UI {
         System.out.println(message);
     }
 
-    //Rasmus (To handle scanner bug)
-    public void printString() {
-        System.out.println();
-    }
-    
-    //Alex
-    public String getString(String message){
-        return message;
+    //Alex + Rasmus
+    public String getString(){
+        return scanner.nextLine();
     }
     //Alex
     public int getInt() {
