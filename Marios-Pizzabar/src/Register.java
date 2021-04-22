@@ -29,7 +29,7 @@ public class Register {
     int choice;
     do {
       ui.printOptionsMenu(menu);
-      choice = ui.getInt();
+      choice = validateChoice("Invalid choice");
       switch (choice) {
         case 1:
           showMenu();
@@ -88,17 +88,31 @@ public class Register {
   // Martin
   public void createOrder() {
     ArrayList<Pizza> pizzas = new ArrayList<>();
+    ui.printString("Select your order - type 0 to finish");
+    int count = 1;
 
     // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
     int choice = -1;
     while (choice != 0) {
-      choice = ui.getInt();
-      for (Pizza p : menu.getMenu()) {
-        if (p.getPizzaNumber() == choice && choice != 0) {
-          pizzas.add(p);
-        }
+      ui.printStringAppend("Pizza " + count + ": ");
+      choice = validateChoice("Invalid choice");
+
+      //Validate range
+
+      while (!isValidRange(1, 30, choice)){
+        ui.printString("Out of range");
+        choice = validateChoice("Invalid choice");
       }
-    }
+
+
+
+        for (Pizza p : menu.getMenu()) {
+          if (p.getPizzaNumber() == choice && choice != 0) {
+            pizzas.add(p);
+          }
+        }
+      count++;
+      }
     orders.add(new Order(pizzas));
     saveOrder();
   }
@@ -232,5 +246,35 @@ public class Register {
   public void clearOrders() {
     orders.clear();
     saveOrder();
+  }
+
+  public int validateChoice(String text) {
+    int choice = -1;
+    while (choice == -1) {
+      if (ui.hasNextInt()) {
+        choice = ui.getInt();
+        ui.getString();
+      } else {
+        ui.printString(text);
+        //ui.printString();
+        ui.getString();
+      }
+    }
+    return choice;
+  }
+  public boolean isValidRange(int range1 ,int range2, int choice){
+    boolean flag = choice>=range1 && choice<=range2 || choice == 0;
+    if (flag){
+      return true;
+    }else {
+      return false;
+    }
+    /*else if (!flag && choice != 0){
+      ui.printString("Invalid Range");
+      return false;
+    }
+
+     */
+
   }
 }
