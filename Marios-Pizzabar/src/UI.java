@@ -9,6 +9,12 @@ public class UI {
     public void printString(String message) {
         System.out.println(message);
     }
+
+    //Rasmus (To handle scanner bug)
+    public void printString() {
+        System.out.println();
+    }
+    
     //Alex
     public String getString(String message){
         return message;
