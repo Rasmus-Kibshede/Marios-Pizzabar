@@ -17,6 +17,13 @@ public class UI {
     public int getInt() {
         return scanner.nextInt();
     }
+
+
+    // Rasmus
+    public void hasNextInt(){
+        scanner.hasNextInt();
+    }
+
     //Alex
     public void printInt(int pizzaNumber) {
         System.out.println(pizzaNumber);
