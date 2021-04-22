@@ -98,19 +98,23 @@ public class Register {
       choice = validateChoice("Invalid choice");
 
       //Validate range
-      if (isValidRange(1,30,choice)) {
+
+      while (!isValidRange(1, 30, choice)){
+        ui.printString("Out of range");
+        choice = validateChoice("Invalid choice");
+      }
+
+
 
         for (Pizza p : menu.getMenu()) {
           if (p.getPizzaNumber() == choice && choice != 0) {
             pizzas.add(p);
           }
         }
-        count++;
-        orders.add(new Order(pizzas));
-        saveOrder();
+      count++;
       }
-    }
-
+    orders.add(new Order(pizzas));
+    saveOrder();
   }
 
   // Martin
@@ -259,15 +263,18 @@ public class Register {
     return choice;
   }
   public boolean isValidRange(int range1 ,int range2, int choice){
-    boolean flag = choice>=range1 && choice<=range2;
+    boolean flag = choice>=range1 && choice<=range2 || choice == 0;
     if (flag){
       return true;
-    }
-    else if (!flag && choice != 0){
-      ui.printString("Invalid Range");
-      return false;
     }else {
       return false;
     }
+    /*else if (!flag && choice != 0){
+      ui.printString("Invalid Range");
+      return false;
+    }
+
+     */
+
   }
 }
