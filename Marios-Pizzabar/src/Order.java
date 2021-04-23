@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 public class Order {
+  //Jakob
   private final String DATETIME;
   private final int ID;
   private static int count;
@@ -55,6 +56,7 @@ public class Order {
     return text.toString();
   }
 
+  // Martin + Jakob
   public ArrayList<Pizza> getORDERLIST() {
     return ORDERLIST;
   }
