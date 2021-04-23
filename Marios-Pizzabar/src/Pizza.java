@@ -34,8 +34,8 @@ public class Pizza {
                 .append(PIZZAPRICE)
                 .append("\t ")
                 .append(PIZZANAME)
-                .append(":\t\t\t\t\t")
-                .append(PIZZATOPPINGS);
+                .append(":\t")
+                .append(new UI().getColorString("cyan", PIZZATOPPINGS));
         return text.toString();
     }
 }

@@ -1,19 +1,27 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
+// Jakob
 public class Order {
-  // Jakob
   private final String DATETIME;
   private final int ID;
   private static int count;
   private String pickUpStatus;
   private final ArrayList<Pizza> ORDERLIST;
-  DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+  public Order(ArrayList<Pizza> thisOrder, String name) {
+    ORDERLIST = thisOrder;
+    setPickUpStatus(name);
+    count++;
+    ID = count;
+
+    DateFormat df = new SimpleDateFormat("HH:mm:ss");
+    Date today = Calendar.getInstance().getTime();
+    DATETIME = df.format(today);
+  }
 
   public int getID() {
     return ID;
@@ -25,17 +33,6 @@ public class Order {
 
   public String getPickUpStatus() {
     return pickUpStatus;
-  }
-
-  public Order(ArrayList<Pizza> thisOrder, String name) {
-    ORDERLIST = thisOrder;
-    setPickUpStatus(name);
-    count++;
-    ID = count;
-
-    LocalDateTime timeNow = LocalDateTime.now();
-    LocalDateTime timeToPickThePizza = timeNow.plusMinutes(10);
-    this.DATETIME = timeToPickThePizza.format(formatDateTime);
   }
 
   // Martin
@@ -56,15 +53,8 @@ public class Order {
     }
     text.append(ORDERLIST.get(ORDERLIST.size() - 1).getPIZZANAME()).append(" ");
     text.append("- ");
-    text.append(new UI().getColorString("yellow", convertDateToString()));
+    text.append(new UI().getColorString("yellow", DATETIME));
     return text.toString();
-  }
-
-  // Martin
-  public String convertDateToString() {
-    DateFormat df = new SimpleDateFormat("HH:mm:ss");
-    Date today = Calendar.getInstance().getTime();
-    return df.format(today);
   }
 
   // Martin + Jakob

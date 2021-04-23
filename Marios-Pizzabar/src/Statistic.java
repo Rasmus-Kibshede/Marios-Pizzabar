@@ -2,8 +2,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Statistics {
+public class Statistic {
+    private int amount;
+    private String text;
     UI ui = new UI();
+
+    public Statistic(int amount, String text) {
+        this.amount = amount;
+        this.text = text;
+    }
+
+    public Statistic() {
+    }
 
     // Martin
     public ArrayList<String> fileToList(String pathname) {
@@ -45,8 +55,8 @@ public class Statistics {
     // Martin
     public void iterateMap(ArrayList<HashMap<String, Double>> statistic) {
         ArrayList<String> earned = new ArrayList<>();
-        ArrayList<String> amount = new ArrayList<>();
-        ArrayList<String> sorted = new ArrayList<>();
+        ArrayList<Integer> amount = new ArrayList<>();
+        ArrayList<Statistic> lst = new ArrayList<>();
 
         Iterator it = statistic.get(0).entrySet().iterator();
         while (it.hasNext()) {
@@ -60,26 +70,42 @@ public class Statistics {
         while (it2.hasNext()) {
             Map.Entry pair = (Map.Entry) it2.next();
             double convert = (double) pair.getValue();
-            String s2 = String.valueOf((int) convert);
-            amount.add(s2);
+            int converted = (int) convert;
+            amount.add(converted);
             it2.remove();
         }
 
         for (int i = 0; i < earned.size(); i++) {
-            sorted.add(amount.get(i) + ": " + earned.get(i));
+            String text = ": " + earned.get(i);
+            lst.add(new Statistic(amount.get(i), text));
         }
 
-        Collections.sort(sorted, Collections.reverseOrder());
-        for (String s : sorted) {
-            ui.printString(s);
+        for (Statistic s : sortB(lst)) {
+            ui.printString(s.toString());
         }
     }
 
-    public void showStatistics() {
+    public ArrayList<Statistic> sortB(ArrayList<Statistic> lst) {
+        for (int i = 1; i < lst.size(); i++) {
+            for (int j = 0 ; j < lst.size() - i; j++) {
+                if (lst.get(j).amount < lst.get(j+1).amount) {
+                    Statistic temp = lst.get(j);
+                    lst.set(j, lst.get(j+1));
+                    lst.set(j + 1, temp);
+                }
+            }
+        }
+        return lst;
+    }
 
-        Statistics stats = new Statistics();
+    public void showStatistics() {
+        Statistic stats = new Statistic();
         ArrayList<String> storage = stats.fileToList("statistics.txt");
         ArrayList<HashMap<String, Double>> map = stats.addToMap(storage);
         stats.iterateMap(map);
+    }
+
+    public String toString() {
+        return amount + text;
     }
 }

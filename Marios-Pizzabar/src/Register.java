@@ -29,19 +29,18 @@ public class Register {
     do {
       ui.printOptionsMenu(menu);
       choice = validateChoice("Invalid choice");
-
+      ui.printString("\n");
       switch (choice) {
         case 1 -> showMenu();
         case 2 -> createOrder();
         case 3 -> viewOrders();
         case 4 -> finishOrder();
         case 5 -> deleteOrder();
-        case 6 -> new Statistics().showStatistics();
+        case 6 -> new Statistic().showStatistics();
         case 7 -> clearOrders();
         case 9 -> ui.printString("Exiting program...");
         default -> ui.printString("Invalid choice");
       }
-      ui.printString("");
     } while (choice != 9);
   }
 
@@ -127,7 +126,7 @@ public class Register {
 
   // Martin
   public void loadOrder() {
-    ArrayList<String> storage = new Statistics().fileToList("orders.txt");
+    ArrayList<String> storage = new Statistic().fileToList("orders.txt");
     ArrayList<Pizza> pizzas = new ArrayList<>();
     String status;
 

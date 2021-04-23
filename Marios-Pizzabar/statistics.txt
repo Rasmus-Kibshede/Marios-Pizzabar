@@ -23,3 +23,9 @@ Funghi_6.45
 Fiorentina_7.0
 Giardino_7.45
 Formaggi_7.0
+Formaggi_7.0
+Regina_8.0
+Fiorentina_7.0
+Calabria_7.45
+Funghi_6.45
+Funghi_6.45

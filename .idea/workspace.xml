@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bb2d277-6e54-412f-a81e-80839bb47e4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marios-Pizzabar/orders.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Marios-Pizzabar/orders.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marios-Pizzabar/statistics.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Marios-Pizzabar/statistics.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,7 @@
       <workItem from="1619165130875" duration="9000" />
       <workItem from="1619169112664" duration="60000" />
       <workItem from="1619169184661" duration="7000" />
+      <workItem from="1619214541899" duration="21000" />
     </task>
     <servers />
   </component>
