@@ -24,41 +24,62 @@ public class Statistics {
     }
 
     // Martin
-    public HashMap<String, Double> addToMap(ArrayList<String> storage) {
-        HashMap<String, Double> statistic = new HashMap<>();
+    public ArrayList<HashMap<String, Double>> addToMap(ArrayList<String> storage) {
+        ArrayList<HashMap<String, Double>> stats = new ArrayList<>();
+        HashMap<String, Double> statisticEarned = new HashMap<>();
+        HashMap<String, Double> statisticAmount = new HashMap<>();
 
         // Split every element in storage, then add to map. Key values get multiplied by the occurrences of the same key name
         for (int i = 0; i < storage.size(); i++) {
             String[] arr = storage.get(i).split("_");
             String name = arr[0];
             double price = Double.parseDouble(arr[1]);
-            statistic.put(name, price * Collections.frequency(storage, storage.get(i)));
+            statisticEarned.put(name, price * Collections.frequency(storage, storage.get(i)));
+            statisticAmount.put(name, (double) Collections.frequency(storage, storage.get(i)));
         }
-        return statistic;
+        stats.add(statisticEarned);
+        stats.add(statisticAmount);
+        return stats;
     }
 
     // Martin
-    public void iterateMap(HashMap<String, Double> statistic) {
-        ArrayList<String> lst = new ArrayList<>();
+    public void iterateMap(ArrayList<HashMap<String, Double>> statistic) {
+        ArrayList<String> earned = new ArrayList<>();
+        ArrayList<String> amount = new ArrayList<>();
+        ArrayList<String> sorted = new ArrayList<>();
 
-        // Iterates over the map, then adds it to lst
-        Iterator it = statistic.entrySet().iterator();
+        Iterator it = statistic.get(0).entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             String s = "$" + pair.getValue() + " \t " + pair.getKey();
-            lst.add(s);
+            earned.add(s);
             it.remove();
         }
 
-        for (int i = 0; i < lst.size(); i++) {
-            ui.printString((i + 1) + ": " + lst.get(i));
+        Iterator it2 = statistic.get(1).entrySet().iterator();
+        while (it2.hasNext()) {
+            Map.Entry pair = (Map.Entry) it2.next();
+            double convert = (double) pair.getValue();
+            String s2 = String.valueOf((int) convert);
+            amount.add(s2);
+            it2.remove();
+        }
+
+        for (int i = 0; i < earned.size(); i++) {
+            sorted.add(amount.get(i) + ": " + earned.get(i));
+        }
+
+        Collections.sort(sorted, Collections.reverseOrder());
+        for (String s : sorted) {
+            ui.printString(s);
         }
     }
 
     public void showStatistics() {
+
         Statistics stats = new Statistics();
         ArrayList<String> storage = stats.fileToList("statistics.txt");
-        HashMap<String, Double> map = stats.addToMap(storage);
+        ArrayList<HashMap<String, Double>> map = stats.addToMap(storage);
         stats.iterateMap(map);
     }
 }
