@@ -12,9 +12,9 @@ public class Order {
   private String pickUpStatus;
   private final ArrayList<Pizza> ORDERLIST;
 
-  public Order(ArrayList<Pizza> thisOrder, String name) {
+  public Order(ArrayList<Pizza> thisOrder, String status) {
     ORDERLIST = thisOrder;
-    setPickUpStatus(name);
+    setPickUpStatus(status);
     count++;
     ID = count;
 
@@ -23,8 +23,20 @@ public class Order {
     DATETIME = df.format(today);
   }
 
+  public Order(ArrayList<Pizza> thisOrder, String status, String date) {
+    ORDERLIST = thisOrder;
+    setPickUpStatus(status);
+    count++;
+    ID = count;
+    DATETIME = date;
+  }
+
   public int getID() {
     return ID;
+  }
+
+  public String getDATETIME() {
+    return DATETIME;
   }
 
   public void setPickUpStatus(String pickUpStatus) {

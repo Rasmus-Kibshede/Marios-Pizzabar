@@ -29,7 +29,7 @@ public class Register {
     do {
       ui.printOptionsMenu(menu);
       choice = validateChoice("Invalid choice");
-      ui.printString("\n");
+      ui.printString("");
       switch (choice) {
         case 1 -> showMenu();
         case 2 -> createOrder();
@@ -41,6 +41,7 @@ public class Register {
         case 9 -> ui.printString("Exiting program...");
         default -> ui.printString("Invalid choice");
       }
+      ui.printString("");
     } while (choice != 9);
   }
 
@@ -67,10 +68,9 @@ public class Register {
         ui.printString("File not found");
       }
       deleteOrder(id);
+      ui.printColorString("green","Finished order #" + id);
     }
-    ui.printString("Finished order #" + id);
   }
-
 
   // Martin + Rasmus
   public void createOrder() {
@@ -94,16 +94,16 @@ public class Register {
         }
       count++;
       }
-    Order order = new Order(pizzas, temp);
 
-    ui.printStringAppend("Total price: ");
-    ui.printStringAppend(ui.getColorString("green", "$" + order.totalPricePizza()));
-    ui.printString("");
-    orders.add(order);
-
-    saveOrder();
+    if (choice != 0) {
+      Order order = new Order(pizzas, temp);
+      ui.printStringAppend("Total price: ");
+      ui.printStringAppend(ui.getColorString("green", "$" + order.totalPricePizza()));
+      ui.printString("");
+      orders.add(order);
+      saveOrder();
+    }
   }
-
 
   // Martin
   public void saveOrder() {
@@ -111,6 +111,8 @@ public class Register {
       PrintStream ps = new PrintStream(new FileOutputStream("orders.txt"));
       for (Order o : orders) {
         ps.append(o.getPickUpStatus());
+        ps.append("_");
+        ps.append(o.getDATETIME());
         ps.append("_");
 
         for (Pizza p : o.getORDERLIST()) {
@@ -129,12 +131,14 @@ public class Register {
     ArrayList<String> storage = new Statistic().fileToList("orders.txt");
     ArrayList<Pizza> pizzas = new ArrayList<>();
     String status;
+    String date;
 
     for (String s : storage) {
       String[] temp = s.split("_");
       status = temp[0];
+      date = temp[1];
 
-      for (int i = 1; i < temp.length; i++) {
+      for (int i = 2; i < temp.length; i++) {
 
         for (Pizza p : menu.getMenu()) {
           if (Integer.parseInt(temp[i]) == p.getPIZZANUMBER()) {
@@ -142,7 +146,7 @@ public class Register {
           }
         }
       }
-      orders.add(new Order(new ArrayList<>(pizzas), status));
+      orders.add(new Order(new ArrayList<>(pizzas), status, date));
       pizzas.clear();
     }
   }
