@@ -6,18 +6,19 @@ public class Statistics {
     UI ui = new UI();
 
     // Martin
-    public ArrayList<String> fileToList() {
+    public ArrayList<String> fileToList(String pathname) {
+        // Store every line of a file to a list
         ArrayList<String> storage = new ArrayList<>();
 
         try {
-            Scanner input = new Scanner(new File("statistics.txt"));
+            Scanner input = new Scanner(new File(pathname));
             while (input.hasNextLine()) {
                 String text = input.nextLine();
                 storage.add(text);
             }
             input.close();
         } catch (FileNotFoundException e) {
-            ui.printColor("red", "File not found");
+            ui.printColorString("red", "File not found");
         }
         return storage;
     }
@@ -52,5 +53,12 @@ public class Statistics {
         for (int i = 0; i < lst.size(); i++) {
             ui.printString((i + 1) + ": " + lst.get(i));
         }
+    }
+
+    public void showStatistics() {
+        Statistics stats = new Statistics();
+        ArrayList<String> storage = stats.fileToList("statistics.txt");
+        HashMap<String, Double> map = stats.addToMap(storage);
+        stats.iterateMap(map);
     }
 }

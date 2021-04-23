@@ -1,45 +1,41 @@
 //Alexander + Rasmus
 public class Pizza {
-    String pizzaName;
-    double pizzaPrice;
-    int pizzaNumber;
-    String pizzaToppings;
+    private final String PIZZANAME;
+    private final double PIZZAPRICE;
+    private final int PIZZANUMBER;
+    private final String PIZZATOPPINGS;
 
     //Alexander + Rasmus
     public Pizza(String pizzaName, double pizzaPrice, int pizzaNumber, String pizzaToppings){
-        this.pizzaName = pizzaName;
-        this.pizzaPrice = pizzaPrice;
-        this.pizzaNumber = pizzaNumber;
-        this.pizzaToppings = pizzaToppings;
+        this.PIZZANAME = pizzaName;
+        this.PIZZAPRICE = pizzaPrice;
+        this.PIZZANUMBER = pizzaNumber;
+        this.PIZZATOPPINGS = pizzaToppings;
     }
 
-    public String getPizzaName() {
-        return pizzaName;
+    public String getPIZZANAME() {
+        return PIZZANAME;
     }
 
-    public double getPizzaPrice() {
-        return pizzaPrice;
+    public double getPIZZAPRICE() {
+        return PIZZAPRICE;
     }
 
-    public int getPizzaNumber() {
-        return pizzaNumber;
-    }
-
-    public String getPizzaToppings() {
-        return pizzaToppings;
+    public int getPIZZANUMBER() {
+        return PIZZANUMBER;
     }
 
     public String toString() {
         StringBuilder text = new StringBuilder();
         text.append("#")
-                .append(pizzaNumber)
+                .append(PIZZANUMBER)
                 .append("\t")
                 .append(" $")
-                .append(pizzaPrice)
+                .append(PIZZAPRICE)
                 .append("\t ")
-                .append(pizzaName)
+                .append(PIZZANAME)
                 .append(":\t\t\t\t\t")
-                .append(pizzaToppings);
+                .append(PIZZATOPPINGS);
         return text.toString();
     }
 }

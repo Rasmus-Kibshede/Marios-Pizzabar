@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -8,7 +7,6 @@ public class Register {
   private Menu menu;
   private UI ui;
   private ArrayList<Order> orders;
-  private Color color = new Color();
 
   // Rasmus + Martin
   public void run() {
@@ -33,13 +31,13 @@ public class Register {
       choice = validateChoice("Invalid choice");
 
       switch (choice) {
-        case 1 -> showMenu(); // SHOW
-        case 2 -> createOrder(); // CREAT
-        case 3 -> viewOrders(); // VIEW
-        case 4 -> finishOrder(); // FINISH
-        case 5 -> deleteOrder(); // DELETE
-        case 6 -> showStatistics(); // STATS
-        case 7 -> clearOrders(); // CLEAR
+        case 1 -> showMenu();
+        case 2 -> createOrder();
+        case 3 -> viewOrders();
+        case 4 -> finishOrder();
+        case 5 -> deleteOrder();
+        case 6 -> new Statistics().showStatistics();
+        case 7 -> clearOrders();
         case 9 -> ui.printString("Exiting program...");
         default -> ui.printString("Invalid choice");
       }
@@ -71,23 +69,27 @@ public class Register {
       }
       deleteOrder(id);
     }
-
     ui.printString("Finished order #" + id);
-
   }
 
-  // Martin + Rasmus
-  public void createOrder() {
-    ArrayList<Pizza> pizzas = new ArrayList<>();
+  public String validatePickUp() {
     String temp;
-
     ui.printStringAppend("Pick up? (y/n) : ");
-    String pickUp = ui.getString();
-    if (pickUp.equals("y")) {
+    String choice = ui.getString();
+    if (choice.equals("y")) {
       temp = ui.getColorString("blue", "Called");
     } else {
       temp = ui.getColorString("cyan", "In store");
     }
+    return temp;
+  }
+
+  // TODO: Shorten while loop
+  // Martin + Rasmus
+  public void createOrder() {
+    ArrayList<Pizza> pizzas = new ArrayList<>();
+
+    String temp = validatePickUp();
     ui.printString("Select your order - type 0 to finish");
 
     int count = 1;
@@ -96,16 +98,16 @@ public class Register {
     int choice = -1;
     while (choice != 0) {
       ui.printStringAppend("Pizza " + count + ": ");
-      choice = validateChoice("Invalid choice");
+      choice = validateChoice("Invalid input");
 
       //Validate range
-      while (!isValidRange(1, 30, choice)){
-        ui.printColor("red", "Out of range");
-        choice = validateChoice("Invalid choice");
+      while (!isValidRange(1, 30, choice)) {
+        ui.printColorString("red", "Out of range");
+        choice = validateChoice("Invalid input");
       }
 
         for (Pizza p : menu.getMenu()) {
-          if (p.getPizzaNumber() == choice && choice != 0) {
+          if (p.getPIZZANUMBER() == choice && choice != 0) {
             pizzas.add(p);
           }
         }
@@ -114,7 +116,7 @@ public class Register {
     Order order = new Order(pizzas, temp);
 
     ui.printStringAppend("Total price: ");
-    ui.printStringAppend(ui.getColorString("green", "$" + String.valueOf(order.totalPricePizza())));
+    ui.printStringAppend(ui.getColorString("green", "$" + order.totalPricePizza()));
     ui.printString("");
     orders.add(order);
 
@@ -128,33 +130,23 @@ public class Register {
       for (Order o : orders) {
         ps.append(o.getPickUpStatus());
         ps.append("_");
-        for (Pizza p : o.getOrderList()) {
 
-          ps.append(String.valueOf(p.getPizzaNumber()));
+        for (Pizza p : o.getORDERLIST()) {
+          ps.append(String.valueOf(p.getPIZZANUMBER()));
           ps.append("_");
         }
         ps.append("\n");
       }
     } catch (FileNotFoundException e) {
-      ui.printColor("red","File not found");
+      ui.printColorString("red","File not found");
     }
   }
 
   // Martin
   public void loadOrder() {
-    ArrayList<String> storage = new ArrayList<>();
+    ArrayList<String> storage = new Statistics().fileToList("orders.txt");
     ArrayList<Pizza> pizzas = new ArrayList<>();
     String status;
-
-    try {
-      Scanner input = new Scanner(new File("orders.txt"));
-      while (input.hasNextLine()) {
-        String text = input.nextLine();
-        storage.add(text);
-      }
-    } catch (FileNotFoundException e) {
-      ui.printColor("red","File not found");
-    }
 
     for (String s : storage) {
       String[] temp = s.split("_");
@@ -163,7 +155,7 @@ public class Register {
       for (int i = 1; i < temp.length; i++) {
 
         for (Pizza p : menu.getMenu()) {
-          if (Integer.parseInt(temp[i]) == p.getPizzaNumber()) {
+          if (Integer.parseInt(temp[i]) == p.getPIZZANUMBER()) {
             pizzas.add(p);
           }
         }
@@ -184,10 +176,11 @@ public class Register {
   public int getValidId() {
     ui.printStringAppend("Enter order ID: ");
     int id = validateChoice("Invalid choice");
+
     if (orderIds().contains(id)) {
       return id;
     } else {
-      ui.printColor("red","Not a valid ID");
+      ui.printColorString("red","Not a valid ID");
     }
     return 0;
   }
@@ -196,7 +189,7 @@ public class Register {
   public ArrayList<Integer> orderIds() {
     ArrayList<Integer> ids = new ArrayList<>();
     for (Order o : orders) {
-      ids.add(o.getId());
+      ids.add(o.getID());
     }
     return ids;
   }
@@ -216,7 +209,7 @@ public class Register {
   // Martin
   public Order findOrder(int id) {
     for (Order o : orders) {
-      if (o.getId() == id) {
+      if (o.getID() == id) {
         return o;
       }
     }
@@ -225,7 +218,7 @@ public class Register {
 
   // Martin
   public void clearOrders() {
-    ui.printColor("yellow", "Are you sure you want to clear the orders? \"y\" to clear.");
+    ui.printColorString("yellow", "Are you sure you want to clear the orders? \"y\" to clear.");
     ui.printStringAppend("Choice: ");
     String s = ui.getString();
     if (s.equals("y")) {
@@ -234,12 +227,6 @@ public class Register {
     }
   }
 
-  public void showStatistics() {
-    Statistics stats = new Statistics();
-    ArrayList<String> storage = stats.fileToList();
-    HashMap<String, Double> map = stats.addToMap(storage);
-    stats.iterateMap(map);
-  }
 
   public int validateChoice(String text) {
     int choice = -1;
@@ -247,12 +234,13 @@ public class Register {
       if (ui.hasNextInt()) {
         choice = ui.getInt();
       } else {
-        ui.printColor("red", text);
+        ui.printColorString("red", text);
       }
       ui.getString();
     }
     return choice;
   }
+
   public boolean isValidRange(int range1 ,int range2, int choice) {
     return choice >= range1 && choice <= range2 || choice == 0;
   }

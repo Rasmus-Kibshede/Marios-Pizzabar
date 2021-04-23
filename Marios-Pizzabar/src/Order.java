@@ -2,31 +2,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-
 public class Order {
-  private String dateTime;
-  private double totalPrice;
-  private int id;
+  private final String DATETIME;
+  private final int ID;
   private static int count;
   private String pickUpStatus;
-  private ArrayList<Pizza> orderList;
-
+  private final ArrayList<Pizza> ORDERLIST;
   DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-  // Getter
-  public double getTotalPrice() {
-    return totalPrice;
-
-  }
-
-  public int getId() {
-    return id;
-
-  }
-
-  public String getDateTime() {
-    return dateTime;
-
+  public int getID() {
+    return ID;
   }
 
   public void setPickUpStatus(String pickUpStatus) {
@@ -37,37 +22,22 @@ public class Order {
     return pickUpStatus;
   }
 
-
-  // Konstruktør
-  public Order(ArrayList<Pizza> thisOrder) {
-    orderList = thisOrder;
-    count++;
-    id = count;
-
-    // Skal det beholdes eller slettes?
-    LocalDateTime timeNow = LocalDateTime.now();
-    LocalDateTime timeToPickThePizza = timeNow.plusMinutes(5);
-    this.dateTime = timeToPickThePizza.format(formatDateTime);
-  }
-
-
   public Order(ArrayList<Pizza> thisOrder, String name) {
-    orderList = thisOrder;
+    ORDERLIST = thisOrder;
     setPickUpStatus(name);
     count++;
-    id = count;
+    ID = count;
 
-    // Skal det beholdes eller slettes?
     LocalDateTime timeNow = LocalDateTime.now();
     LocalDateTime timeToPickThePizza = timeNow.plusMinutes(10);
-    this.dateTime = timeToPickThePizza.format(formatDateTime);
+    this.DATETIME = timeToPickThePizza.format(formatDateTime);
   }
 
   // Martin
   public ArrayList<String> statisticsFormat() {
     ArrayList<String> lst = new ArrayList<>();
-    for (int i = 0; i < orderList.size(); i++) {
-      lst.add(orderList.get(i).getPizzaName() + "_" + orderList.get(i).getPizzaPrice());
+    for (Pizza pizza : ORDERLIST) {
+      lst.add(pizza.getPIZZANAME() + "_" + pizza.getPIZZAPRICE());
     }
     return lst;
   }
@@ -75,32 +45,25 @@ public class Order {
   // Martin + Jakob
   public String toString() {
     StringBuilder text = new StringBuilder();
-    text.append("#").append(id).append(" ").append(pickUpStatus).append(" - ");
-    for (int i = 0; i < orderList.size() - 1; i++) {
-      text.append(orderList.get(i).getPizzaName()).append(", ");
+    text.append("#").append(ID).append(" ").append(pickUpStatus).append(" - ");
+    for (int i = 0; i < ORDERLIST.size() - 1; i++) {
+      text.append(ORDERLIST.get(i).getPIZZANAME()).append(", ");
     }
-    text.append(orderList.get(orderList.size() - 1).getPizzaName()).append(" ");
-    text.append(dateTime);
+    text.append(ORDERLIST.get(ORDERLIST.size() - 1).getPIZZANAME()).append(" ");
+    text.append(DATETIME);
 
     return text.toString();
   }
 
-  public ArrayList<Pizza> getOrderList() {
-    return orderList;
+  public ArrayList<Pizza> getORDERLIST() {
+    return ORDERLIST;
   }
 
   public double totalPricePizza() {
     double sum = 0;
-    for (int i = 0; i < orderList.size(); i++) {
-      sum += orderList.get(i).getPizzaPrice();
+    for (Pizza pizza : ORDERLIST) {
+      sum += pizza.getPIZZAPRICE();
     }
-
     return sum;
   }
-
 }
-
-
-
-
-

@@ -11,15 +11,11 @@ public class Menu {
     this.menuHeader = menuHeader;
     this.leadText = leadText;
     this.menuOptions = menuOptions;
-    addPizza();
-  }
-
-  public Menu() {
-    addPizza();
+    createPizzaMenu();
   }
 
   // Martin + Rasmus
-  public void addPizza() {
+  public void createPizzaMenu() {
     pizzaMenuList.add(new Pizza("Margherita", 5.45, 1, "Tomato sauce, mozzarella, basil."));
     pizzaMenuList.add(new Pizza("Funghi", 6.45, 2, "Tomato sauce, mozzarella, mushrooms, thyme."));
     pizzaMenuList.add(new Pizza("Fiorentina", 7.00, 3, "Tomato sauce, mozzarella, parmesan, egg, fresh spinach."));
@@ -52,16 +48,6 @@ public class Menu {
     pizzaMenuList.add(new Pizza("Bufalina", 9.45, 30, "Tomato Sauce, Buffalo Mozzarella and Basil"));
   }
 
-  // Martin
-  public void deletePizza(int id) {
-    for (Pizza p : pizzaMenuList) {
-        if (p.pizzaNumber == id) {
-            pizzaMenuList.remove(p);
-            break;
-        }
-    }
-  }
-
   public String getMenuHeader() {
     return menuHeader;
   }
@@ -73,8 +59,8 @@ public class Menu {
   // Rasmus
   public String getPizzaMenuList() {
     StringBuilder text = new StringBuilder();
-    for (int i = 0; i < pizzaMenuList.size(); i++) {
-      text.append("\n").append(pizzaMenuList.get(i));
+    for (Pizza pizza : pizzaMenuList) {
+      text.append("\n").append(pizza);
     }
     text.append("\n");
 
@@ -83,8 +69,8 @@ public class Menu {
 
   public String getMenuOptions() {
     StringBuilder text = new StringBuilder();
-    for (int i = 0; i < menuOptions.size(); i++) {
-      text.append("\n").append(menuOptions.get(i));
+    for (String menuOption : menuOptions) {
+      text.append("\n").append(menuOption);
     }
     text.append("\n");
 
