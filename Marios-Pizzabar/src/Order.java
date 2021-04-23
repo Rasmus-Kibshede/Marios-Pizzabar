@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Order {
+  // Jakob
   private final String DATETIME;
   private final int ID;
   private static int count;
@@ -59,12 +60,14 @@ public class Order {
     return text.toString();
   }
 
+  // Martin
   public String convertDateToString() {
     DateFormat df = new SimpleDateFormat("HH:mm:ss");
     Date today = Calendar.getInstance().getTime();
     return df.format(today);
   }
 
+  // Martin + Jakob
   public ArrayList<Pizza> getORDERLIST() {
     return ORDERLIST;
   }
