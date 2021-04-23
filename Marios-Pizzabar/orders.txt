@@ -1,4 +1,1 @@
-[34mCalled[0m_2_
-[34mCalled[0m_3_
-[36mIn store[0m_5_4_7_6_5_
-[36mIn store[0m_1_2_3_4_
+[34mCalled[0m_1_2_

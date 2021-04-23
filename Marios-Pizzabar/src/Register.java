@@ -72,19 +72,7 @@ public class Register {
     ui.printString("Finished order #" + id);
   }
 
-  public String validatePickUp() {
-    String temp;
-    ui.printStringAppend("Pick up? (y/n) : ");
-    String choice = ui.getString();
-    if (choice.equals("y")) {
-      temp = ui.getColorString("blue", "Called");
-    } else {
-      temp = ui.getColorString("cyan", "In store");
-    }
-    return temp;
-  }
 
-  // TODO: Shorten while loop
   // Martin + Rasmus
   public void createOrder() {
     ArrayList<Pizza> pizzas = new ArrayList<>();
@@ -98,13 +86,7 @@ public class Register {
     int choice = -1;
     while (choice != 0) {
       ui.printStringAppend("Pizza " + count + ": ");
-      choice = validateChoice("Invalid input");
-
-      //Validate range
-      while (!isValidRange(1, 30, choice)) {
-        ui.printColorString("red", "Out of range");
-        choice = validateChoice("Invalid input");
-      }
+      choice = validRange(1, 30);
 
         for (Pizza p : menu.getMenu()) {
           if (p.getPIZZANUMBER() == choice && choice != 0) {
@@ -122,6 +104,7 @@ public class Register {
 
     saveOrder();
   }
+
 
   // Martin
   public void saveOrder() {
@@ -227,6 +210,19 @@ public class Register {
     }
   }
 
+  //----------------------------------------------- Validates ---------------------------------------------
+
+  //Rasmus
+  public int validRange(int range1 , int range2) {
+    int choice = validateChoice("Invalid input");
+
+    while (!(choice >= range1 && choice <= range2 || choice == 0)) {
+      ui.printColorString("red", "Out of range, enter a new number");
+      choice = validateChoice("Invalid input, enter a new number");
+    }
+
+    return choice;
+  }
 
   public int validateChoice(String text) {
     int choice = -1;
@@ -241,7 +237,16 @@ public class Register {
     return choice;
   }
 
-  public boolean isValidRange(int range1 ,int range2, int choice) {
-    return choice >= range1 && choice <= range2 || choice == 0;
+  public String validatePickUp() {
+    String temp;
+    ui.printStringAppend("Pick up? (y/n) : ");
+    String choice = ui.getString();
+    if (choice.equals("y")) {
+      temp = ui.getColorString("blue", "Called");
+    } else {
+      temp = ui.getColorString("cyan", "In store");
+    }
+    return temp;
   }
+
 }
