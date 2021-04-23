@@ -238,15 +238,21 @@ public class Register {
   }
 
   public String validatePickUp() {
-    String temp;
     ui.printStringAppend("Pick up? (y/n) : ");
-    String choice = ui.getString();
-    if (choice.equals("y")) {
-      temp = ui.getColorString("blue", "Called");
-    } else {
-      temp = ui.getColorString("cyan", "In store");
-    }
-    return temp;
-  }
+    String choice = " ";
 
+    while (!(choice.equals("y") || choice.equals("n"))) {
+      choice = ui.getString();
+      if (!(choice.equals("y") || choice.equals("n"))) {
+        ui.printColorString("red", "Invalid choice");
+      }
+    }
+
+    if (choice.equals("y")) {
+      return ui.getColorString("blue", "Called");
+    }
+    else {
+      return ui.getColorString("cyan", "In store");
+    }
+  }
 }

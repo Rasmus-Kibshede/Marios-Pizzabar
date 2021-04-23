@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1bb2d277-6e54-412f-a81e-80839bb47e4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Marios-Pizzabar/out/production/Marios-Pizzabar/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/Marios-Pizzabar/out/production/Marios-Pizzabar/Register.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +40,8 @@
       <workItem from="1619009273517" duration="33000" />
       <workItem from="1619164443286" duration="13000" />
       <workItem from="1619165130875" duration="9000" />
+      <workItem from="1619169112664" duration="60000" />
+      <workItem from="1619169184661" duration="7000" />
     </task>
     <servers />
   </component>

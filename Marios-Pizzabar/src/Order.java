@@ -1,6 +1,10 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Order {
   private final String DATETIME;
@@ -8,7 +12,7 @@ public class Order {
   private static int count;
   private String pickUpStatus;
   private final ArrayList<Pizza> ORDERLIST;
-  DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+  DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("HH:mm:ss");
 
   public int getID() {
     return ID;
@@ -50,9 +54,15 @@ public class Order {
       text.append(ORDERLIST.get(i).getPIZZANAME()).append(", ");
     }
     text.append(ORDERLIST.get(ORDERLIST.size() - 1).getPIZZANAME()).append(" ");
-    text.append(DATETIME);
-
+    text.append("- ");
+    text.append(new UI().getColorString("yellow", convertDateToString()));
     return text.toString();
+  }
+
+  public String convertDateToString() {
+    DateFormat df = new SimpleDateFormat("HH:mm:ss");
+    Date today = Calendar.getInstance().getTime();
+    return df.format(today);
   }
 
   public ArrayList<Pizza> getORDERLIST() {
