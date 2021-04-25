@@ -83,6 +83,7 @@ public class Register {
 
     // Finds pizzas from the menu with pizzaNumbers that matches the choice(s)
     int choice = -1;
+    int nullValidate = 0;
     while (choice != 0) {
       ui.printStringAppend("Pizza " + count + ": ");
       choice = validRange(1, 30);
@@ -90,12 +91,13 @@ public class Register {
         for (Pizza p : menu.getMenu()) {
           if (p.getPIZZANUMBER() == choice && choice != 0) {
             pizzas.add(p);
+            nullValidate = 1;
           }
         }
       count++;
       }
 
-    if (choice != 0) {
+    if (nullValidate == 1) {
       Order order = new Order(pizzas, temp);
       ui.printStringAppend("Total price: ");
       ui.printStringAppend(ui.getColorString("green", "$" + order.totalPricePizza()));
