@@ -155,8 +155,12 @@ public class Register {
 
   // Martin
   public void viewOrders() {
-    for (Order o : orders) {
-      ui.printString(o.toString());
+    if (orders.size() != 0){
+      for (Order o : orders) {
+        ui.printString(o.toString());
+      }
+    }else {
+      ui.printColorString("yellow", "There are no orders");
     }
   }
 
@@ -219,7 +223,7 @@ public class Register {
 
   //Rasmus
   public int validRange(int range1 , int range2) {
-    int choice = validateChoice("Invalid input");
+    int choice = validateChoice("Invalid input, enter a new number");
 
     while (!(choice >= range1 && choice <= range2 || choice == 0)) {
       ui.printColorString("red", "Out of range, enter a new number");
