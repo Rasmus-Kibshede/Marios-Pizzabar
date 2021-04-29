@@ -157,7 +157,7 @@ public class Register {
   public void viewOrders() {
     if (orders.size() != 0){
       for (Order o : orders) {
-        ui.printString(o.toString());
+        ui.printColorString("yellow",o.toString());
       }
     }else {
       ui.printColorString("yellow", "There are no orders");

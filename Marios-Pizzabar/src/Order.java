@@ -65,7 +65,7 @@ public class Order {
     }
     text.append(ORDERLIST.get(ORDERLIST.size() - 1).getPIZZANAME()).append(" ");
     text.append("- ");
-    text.append(new UI().getColorString("yellow", DATETIME));
+    text.append(DATETIME);
     return text.toString();
   }
 
